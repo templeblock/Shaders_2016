@@ -1,0 +1,163 @@
+<ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="miles@noesclavo.com
+
+GLOW
+
+A pleasent glow.
+
+The blur algorithm is the artistry of Lewis Saunders." Name="GLOW">
+   <Shader OutputBitDepth="Output" Index="1">
+      <Uniform Tooltip="Front" DisplayName="Front" Index="0" NoInput="Error" Tooltip="" DisplayName="Front" InputType="Front" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
+      </Uniform>
+      <Uniform Index="2" NoInput="White" Tooltip="" DisplayName="Strength" InputColor="80, 80, 20" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Strength">
+      </Uniform>
+	<Uniform Max="1000000" Min="-1000000" Default="0" Inc="1" Tooltip="Working colorspace. Set this to the current working colorspace. This insures a linear blur, and same results across diffferent colorspaces." Row="0" Col="3" Page="0" DisplayName="Colorspace" Type="int" Name="i_colorspace" ValueType="Popup">
+         <PopupEntry Title="Rec 709" Value="0">
+         </PopupEntry>
+         <PopupEntry Title="sRGB" Value="1">
+         </PopupEntry>
+         <PopupEntry Title="Linear" Value="2">
+         </PopupEntry>
+         <PopupEntry Title="2.2 Gamma" Value="3">
+         </PopupEntry>
+         <PopupEntry Title="1.8 Gamma" Value="4">
+         </PopupEntry>
+      </Uniform>
+   </Shader>
+   <Shader OutputBitDepth="Output" Index="2">
+      <Uniform Index="1" NoInput="White" Tooltip="" DisplayName="Matte" InputType="Matte" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Matte">
+      </Uniform>
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass1">
+      </Uniform>
+   </Shader>
+   <Shader OutputBitDepth="Output" Index="3">
+		<Uniform Inc="0.01" Tooltip="Add a color cast to the glow." Row="0" Col="2" Page="0" IconType="None" ValueType="Colour" Type="vec3" DisplayName="Tint" Name="color">
+         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0">
+         </SubUniform>
+         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0">
+         </SubUniform>
+         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0">
+         </SubUniform>
+      </Uniform>
+		<Uniform ResDependent="None" Max="10.0" Min="-1.0" Default="-1.0" Inc="0.01" Tooltip="Crunch the dark parts of the threshold. Lower number is darker." Row="1" Col="2" Page="0" Type="float" DisplayName="Shadow Depth" Name="shadow_gain">
+      </Uniform>
+      <Uniform ResDependent="None" Max="10.0" Min="-10.0" Default="2.0" Inc="0.01" Tooltip="Brighten the highlights in the threshold." Row="2" Col="2" Page="0" Type="float" DisplayName="Highlights" Name="highlight_gain">
+      </Uniform>
+
+	<Uniform ResDependent="None" Max="10.0" Min=".1" Default="1.0" Inc="0.01" Tooltip="Adjust the gamma of the threshold." Row="3" Col="2" Page="0" Type="float" DisplayName="Gamma" Name="gamma">
+      </Uniform>
+	<Uniform ResDependent="None" Max="10.0" Min="-10.0" Default="0.5" Inc="0.01" Tooltip="Adjust the saturation of the threshold." Row="4" Col="2" Page="0" Type="float" DisplayName="Saturation" Name="saturation">
+      </Uniform>
+
+	 <Uniform Row="3" Col="1" Page="0" Default="False" Tooltip="Invert the luminance of the threshold." Type="bool" DisplayName="Invert Threshold" Name="invert_thresh">
+      </Uniform>
+
+
+		<Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass1">
+      	</Uniform>
+      	<Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass2">
+      	</Uniform>
+	</Shader>
+
+   <Shader OutputBitDepth="Output" Index="4">
+      <Uniform ResDependent="None" Max="1000000.0" Min="000000.0" Default="1.0" Inc="0.01" Tooltip="Vertical blur bias." Row="1" Col="1" Page="0" Type="float" DisplayName="Blur Y" Name="v_bias">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="000000.0" Default="1.0" Inc="0.01" Tooltip="Blur red bias." Row="1" Col="0" Page="0" Type="float" DisplayName="Red" Name="blur_red">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="000000.0" Default="1.2" Inc="0.01" Tooltip="Blur green bias." Row="2" Col="0" Page="0" Type="float" DisplayName="Green" Name="blur_green">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="000000.0" Default="1.4" Inc="0.01" Tooltip="Blur blue bias." Row="3" Col="0" Page="0" Type="float" DisplayName="Blue" Name="blur_blue">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="000000.0" Default="1.0" Inc="0.01" Tooltip="Blur matte bias." Row="4" Col="0" Page="0" Type="float" DisplayName="Matte" Name="blur_matte">
+      </Uniform>
+	  <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass1">
+      </Uniform>
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass3">
+      </Uniform>
+      <Uniform ResDependent="None" Max="200.0" Min="000000.0" Default="30.0" Inc="0.01" Tooltip="Overall width of the glow." Row="0" Col="0" Page="0" Type="float" DisplayName="Width" Name="blur_amount">
+      </Uniform>
+   </Shader>
+   <Shader OutputBitDepth="Output" Index="5">
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass1">
+      </Uniform>
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass4">
+      </Uniform>
+      <Uniform Type="float" DisplayName="blur_red" Name="blur_red">
+         <Duplicate>
+         </Duplicate>
+      </Uniform>
+      <Uniform Type="float" DisplayName="blur_green" Name="blur_green">
+         <Duplicate>
+         </Duplicate>
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="000000.0" Default="1.0" Inc="0.01" Tooltip="Horizontal blur bias." Row="0" Col="1" Page="0" Type="float" DisplayName="Blur X" Name="h_bias">
+      </Uniform>
+      <Uniform Type="float" DisplayName="blur_blue" Name="blur_blue">
+         <Duplicate>
+         </Duplicate>
+      </Uniform>
+      <Uniform Type="float" DisplayName="blur_matte" Name="blur_matte">
+         <Duplicate>
+         </Duplicate>
+      </Uniform>
+      <Uniform Type="float" DisplayName="blur_amount" Name="blur_amount">
+         <Duplicate>
+         </Duplicate>
+      </Uniform>
+   </Shader>
+   <Shader OutputBitDepth="Output" Index="6">
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass1">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="000000.0" Default="0.0" Inc="0.01" Tooltip="Adjust the matte gain." Row="4" Col="1" Page="0" Type="float" DisplayName="Matte Gain" Name="matte_gain">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0" Inc="0.01" Tooltip="Increase or decrease the gain of the orginal source. A value of zero will show the glow only." Row="2" Col="3" Page="0" Type="float" DisplayName="Scale Source" Name="scale_source">
+      </Uniform>
+      <Uniform Row="2" Col="1" Page="0" Default="False" Tooltip="Display the threshold being used to isolate the glow." Type="bool" DisplayName="Show Threshold" Name="show_threshold">
+      </Uniform>
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass2">
+      </Uniform>
+	     <Uniform Type="int" DisplayName="i_colorspace" Name="i_colorspace">
+         <Duplicate>
+         </Duplicate>
+      </Uniform>
+	 <Uniform Default="0" Inc="1" Tooltip="The blend mode used to apply the glow to the original image." Row="3" Col="3" Page="0" DisplayName="Blend Mode" Type="int" ValueType="Popup" Name="blend_mode">
+         <PopupEntry Title="Screen" Value="17">
+         </PopupEntry>
+         <PopupEntry Title="Add" Value="0">
+         </PopupEntry>
+         <PopupEntry Title="Softlight" Value="13">
+         </PopupEntry>
+         <PopupEntry Title="Overlay" Value="18">
+         </PopupEntry>
+         <PopupEntry Title="Spotlight" Value="11">
+         </PopupEntry>
+         <PopupEntry Title="Multiply" Value="2">
+         </PopupEntry>
+         <PopupEntry Title="Hardlight" Value="14">
+         </PopupEntry>
+         <PopupEntry Title="Pinlight" Value="15">
+         </PopupEntry>
+         <PopupEntry Title="Linear Burn" Value="10">
+         </PopupEntry>
+         <PopupEntry Title="Linear Light" Value="32">
+         </PopupEntry>
+      </Uniform>
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass3">
+      </Uniform>
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass5">
+      </Uniform>
+	<Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="5.0" Inc="0.01" Tooltip="The intensity of the glow." Row="1" Col="3" Page="0" Type="float" DisplayName="Brightness" Name="gain">
+      </Uniform>
+   </Shader>
+   <Page Name="Glow" Page="0">
+      <Col Name="Blur" Col="0" Page="0">
+      </Col>
+      <Col Name="Options" Col="1" Page="0">
+      </Col>
+      <Col Name="Threshold Details" Col="2" Page="0">
+      </Col>
+      <Col Name="I/O" Col="3" Page="0">
+      </Col>
+   </Page>
+   <Page Name="I/O" Page="0">
+   </Page>
+</ShaderNodePreset>
