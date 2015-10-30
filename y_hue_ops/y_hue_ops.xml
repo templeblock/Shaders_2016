@@ -2,7 +2,7 @@
 
 HUE OPS
 
-Isolate hues, and adjust there color / saturation. Done in YUV not the pesky HSV.
+Isolate hues, and adjust their color / saturation. Done in YUV not the pesky HSV.
 " Name="HUE OPS">
    <Shader OutputBitDepth="Output" Index="1">
       <Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="Front" InputType="Front" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
