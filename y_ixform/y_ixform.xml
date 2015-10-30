@@ -1,0 +1,54 @@
+<ShaderNodePreset SupportsAdaptiveDegradation="0" LimitInputsToTexture="True" Version="1" Description="miles@noesclavo.com
+
+IXFORM
+
+Transform a thing. This is only cool if you input the optional black and white strength channel. The transormation will be multiplied by the value of the strength channel." Name="IXFORM">
+   <Shader OutputBitDepth="Output" Index="1">
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Vertical translation." Row="1" Col="0" Page="0" DisplayName="Position Y" Type="float" Name="pos_y">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Vertical skew." Row="1" Col="1" Page="0" DisplayName="Skey Y" Type="float" Name="skew_y">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0" Inc="0.01" Tooltip="Vertical scale bias." Row="2" Col="2" Page="0" DisplayName="Scale Y" Type="float" Name="scale_y">
+      </Uniform>
+
+	 <Uniform Inc="0.01" Tooltip="Center of scale and rotation." Row="3" Col="2" Page="0" IconType="Light" Type="vec2" DisplayName="Center" Name="center">
+         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.5">
+         </SubUniform>
+         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.5">
+         </SubUniform>
+      </Uniform>
+
+      <Uniform Index="2" NoInput="White" Tooltip="" DisplayName="Strength" InputColor="80, 80, 20" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Strength">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="0" Col="3" Page="0" DisplayName="Transparency" Type="float" Name="trans">
+      </Uniform>
+      <Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="Front" InputType="Front" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Rotation." Row="3" Col="0" Page="0" DisplayName="Rotation" Type="float" Name="rot">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Horizontal skew." Row="0" Col="1" Page="0" DisplayName="Skew X" Type="float" Name="skew_x">
+      </Uniform>
+      <Uniform Index="1" NoInput="White" Tooltip="" DisplayName="Matte" InputType="Matte" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Matte">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Scale from the center." Row="0" Col="2" Page="0" DisplayName="Scale" Type="float" Name="scale">
+      </Uniform>
+      <Uniform Row="1" Col="3" Page="0" Default="False" Tooltip="Repeat the texture." DisplayName="Repeat Texture" Type="bool" Name="repeat_texture">
+      </Uniform>
+      <Uniform Row="2" Col="3" Page="0" Default="False" Tooltip="Output warped only. Default is to comp over the original." DisplayName="Warped Only" Type="bool" Name="warped_only">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0" Inc="0.01" Tooltip="Horizontal scale bias." Row="1" Col="2" Page="0" DisplayName="Scale X" Type="float" Name="scale_x">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Horizontal translation." Row="0" Col="0" Page="0" DisplayName="Position X" Type="float" Name="pos_x">
+      </Uniform>
+   </Shader>
+   <Page Name="IXFORM" Page="0">
+      <Col Name="Position / Rotation" Col="0" Page="0">
+      </Col>
+      <Col Name="Skew" Col="1" Page="0">
+      </Col>
+      <Col Name="Scale" Col="2" Page="0">
+      </Col>
+      <Col Name="Options" Col="3" Page="0">
+      </Col>
+   </Page>
+</ShaderNodePreset>

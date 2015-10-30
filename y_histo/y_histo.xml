@@ -1,0 +1,34 @@
+<ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="miles@noesclavo.com
+
+HISTO
+
+A historgram type shader that updates as you change the settings. Imagine that." Name="HISTO">
+   <Shader OutputBitDepth="Output" Index="1">
+      <Uniform ResDependent="None" Max="10.0" Min="-10.0" Default="0.0" Inc="0.01" Tooltip="Crunch the shadows. Lower is darker." Row="0" Col="0" Page="0" Type="float" DisplayName="Shadow Depth" Name="shadow_gain" UIConditionSource="midtones" UIConditionValue="False" UIConditionType="Disable">
+      </Uniform>
+      <Uniform ResDependent="None" Max="10.0" Min="-10.0" Default="1.0" Inc="0.01" Tooltip="Adjust the Highlights." Row="2" Col="0" Page="0" Type="float" DisplayName="Highlights" Name="highlight_gain" UIConditionSource="midtones" UIConditionValue="False" UIConditionType="Disable">
+      </Uniform>
+      <Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="Front" InputType="Front" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
+      </Uniform>
+      <Uniform Index="1" NoInput="White" Tooltip="" DisplayName="Matte" InputType="Matte" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Matte">
+      </Uniform>
+      <Uniform ResDependent="None" Max="10.0" Min="-10.0" Default="0.5" Inc="0.01" Tooltip="Where the shadows end and the highlights begin, or vice versa." Row="1" Col="0" Page="0" Type="float" DisplayName="Pivot" Name="mid">
+      </Uniform>
+	   <Uniform Row="0" Col="1" Page="0" Default="True" Tooltip="Clamp values between 0 and 1." Type="bool" DisplayName="Clamp Output" Name="clamp_output">
+	         </Uniform>
+			  <Uniform Row="1" Col="1" Page="0" Default="False" Tooltip="Negate input thereby negating the output." Type="bool" DisplayName="Negate" Name="negate_input">
+			        </Uniform>
+		 <Uniform Row="2" Col="1" Page="0" Default="False" Tooltip="Isolate the midtones only." Type="bool" DisplayName="Midtone Matte" Name="midtones">
+		       </Uniform>
+
+	<Uniform Row="3" Col="1" Page="0" Default="False" Tooltip="Output as black and white image." Type="bool" DisplayName="Output Mono" Name="mono">
+      </Uniform>
+
+   </Shader>
+   <Page Name="HISTO" Page="0">
+      <Col Name="Levels" Col="0" Page="0">
+      </Col>
+      <Col Name="IO" Col="1" Page="0">
+      </Col>
+   </Page>
+</ShaderNodePreset>

@@ -1,0 +1,103 @@
+<ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="miles@noesclavo.com
+
+DIRBLUR
+
+Apply a directional blur." Name="DIRBLUR">
+   <Shader OutputBitDepth="Output" Index="1">
+      <Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="Front" InputType="Front" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
+      </Uniform>
+      <Uniform Row="0" Col="2" Page="0" Default="False" Tooltip="Invert the matte." Type="bool" DisplayName="Invert Matte" Name="invert_matte">
+      </Uniform>
+	<Uniform Max="1000000" Min="-1000000" Default="0" Inc="1" Tooltip="Working colorspace. Set this to the current working colorspace. This insures a linear blur (no dark edges)." Row="0" Col="3" Page="0" DisplayName="Colorspace" Type="int" Name="i_colorspace" ValueType="Popup">
+         <PopupEntry Title="Rec 709" Value="0">
+         </PopupEntry>
+         <PopupEntry Title="sRGB" Value="1">
+         </PopupEntry>
+         <PopupEntry Title="Linear" Value="2">
+         </PopupEntry>
+         <PopupEntry Title="2.2 Gamma" Value="3">
+         </PopupEntry>
+         <PopupEntry Title="1.8 Gamma" Value="4">
+         </PopupEntry>
+      </Uniform>
+
+      <Uniform Index="1" NoInput="White" Tooltip="" DisplayName="Matte" InputType="Matte" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Matte">
+      </Uniform>
+   </Shader>
+   <Shader OutputBitDepth="Output" Index="2">
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass1">
+      </Uniform>
+      <Uniform Index="2" NoInput="White" Tooltip="" DisplayName="Strength" InputColor="80, 80, 20" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Strength">
+      </Uniform>
+   </Shader>
+   <Shader OutputBitDepth="Output" Index="3">
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass1">
+      </Uniform>
+   </Shader>
+   <Shader OutputBitDepth="Output" Index="4">
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0" Inc="0.01" Tooltip="Red blur bias." Row="1" Col="0" Page="0" Type="float" DisplayName="Red" Name="blur_red">
+      </Uniform>
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass3">
+      </Uniform>
+      <Uniform Type="int" DisplayName="i_colorspace" Name="i_colorspace">
+         <Duplicate>
+         </Duplicate>
+      </Uniform>
+      <Uniform Row="1" Col="2" Page="0" Default="True" Tooltip="Only apply blur to pixels that reside inside the area of the matte." Type="bool" DisplayName="Keep Inside" Name="keep_inside">
+      </Uniform>
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass1">
+      </Uniform>
+	  <!--
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.1" Tooltip="" Row="0" Col="1" Page="0" Type="float" DisplayName="Angle" Name="direction">
+      </Uniform>
+	  -->
+
+      <Uniform Row="2" Col="2" Page="0" Default="False" Tooltip="Blur in the direction provided as well as the opposite direction." Type="bool" DisplayName="Bi-directional" Name="bidir">
+      </Uniform>
+	  <Uniform Row="3" Col="2" Page="0" Default="False" Tooltip="Can help remove artificts on very strong 90 degree blurs." Type="bool" DisplayName="Soften Perpendicular" Name="soften_perp">
+	        </Uniform>
+		<Uniform Max="100" Min="0" Default="0" Inc="1" Tooltip="The amount to soften perpendicular" Row="4" Col="2" Page="0" Type="int" DisplayName="Soften Amount" Name="soften" UIConditionSource="soften_perp" UIConditionValue="True" UIConditionType="Disable">
+		      </Uniform>
+	<Uniform Inc="0.01" Tooltip="Choose the direction to blur by giving a directional vector. Use the light icon for interactivity, or link values to a tracked axis for more fancy type things." Row="1" Col="1" Page="0" IconType="Light" Type="vec2" DisplayName="Direction" Name="angle_vector" UIConditionSource="use_angle" UIConditionValue="False" UIConditionType="Hide">
+         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.5">
+         </SubUniform>
+         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0">
+         </SubUniform>
+      </Uniform>
+
+<!--
+<Uniform Inc="0.01" Tooltip="" Row="2" Col="1" Page="0" IconType="Light" Type="vec2" DisplayName="Direction" Name="start_vector">
+         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.5">
+         </SubUniform>
+         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.5">
+         </SubUniform>
+      </Uniform>
+	  -->
+
+	 <Uniform Row="0" Col="1" Page="0" Default="False" Tooltip="Give direction by specifing an angle." Type="bool" DisplayName="Use Angle not Direction" Name="use_angle">
+      </Uniform>
+	<Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="The angle at which the blur shoud follow." Row="1" Col="1" Page="0" Type="float" DisplayName="Angle" Name="angle_float" UIConditionSource="use_angle" UIConditionValue="True" UIConditionType="Hide">
+      </Uniform>
+
+
+
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Overall blur amount." Row="0" Col="0" Page="0" Type="float" DisplayName="Blur" Name="blur_amount">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0" Inc="0.01" Tooltip="Blur blur bias." Row="3" Col="0" Page="0" Type="float" DisplayName="Blue" Name="blur_blue">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0" Inc="0.01" Tooltip="Green blur bias." Row="2" Col="0" Page="0" Type="float" DisplayName="Green" Name="blur_green">
+      </Uniform>
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass2">
+      </Uniform>
+   </Shader>
+   <Page Name="DIRBLUR" Page="0">
+      <Col Name="Blur" Col="0" Page="0">
+      </Col>
+      <Col Name="Angle" Col="1" Page="0">
+      </Col>
+      <Col Name="Options" Col="2" Page="0">
+      </Col>
+      <Col Name="Input Options" Col="3" Page="0">
+      </Col>
+   </Page>
+</ShaderNodePreset>
