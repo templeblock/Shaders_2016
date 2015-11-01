@@ -6,6 +6,7 @@ uniform sampler2D adsk_results_pass1;
 uniform sampler2D adsk_results_pass2;
 uniform sampler2D adsk_results_pass3;
 uniform sampler2D adsk_results_pass5;
+uniform float adsk_time;
 
 uniform float adsk_result_w, adsk_result_h;
 vec2 res = vec2(adsk_result_w, adsk_result_h);
@@ -16,6 +17,7 @@ uniform bool show_threshold;
 uniform float scale_source;
 uniform int blend_mode;
 uniform float gain;
+uniform float grain;
 
 uniform int i_colorspace;
 
@@ -89,6 +91,8 @@ void main(void)
     vec4 source = front;
     source = mix(vec4(0.0), source, scale_source);
     blur = blur * mix(1.0, gain, strength);
+
+    blur = mix(blur, blur * fract(sin(dot(st ,vec2(12.9898,78.233))) * 43758.5453 * adsk_time), grain);
 
     vec4 comp = front;
 

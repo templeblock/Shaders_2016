@@ -4,7 +4,6 @@ float adsk_getLuminance( in vec3 color );
 float adsk_highlights( in float pixel, in float halfPoint ); 
 float adsk_shadows( in float pixel, in float halfPoint ); 
 
-uniform float adsk_time;
 uniform sampler2D adsk_results_pass1;
 uniform sampler2D adsk_results_pass2;
 uniform float adsk_result_w, adsk_result_h;
@@ -16,7 +15,6 @@ uniform float strength_in;
 uniform float gamma;
 uniform float shadow_gain;
 uniform float highlight_gain;
-uniform float grain;
 uniform bool invert_thresh;
 
 vec3 to_yuv(vec3 col)
@@ -94,8 +92,6 @@ void main(void)
     comp = to_rgb(comp);
 
     comp *= color;
-
-    comp = mix(comp, comp * fract(sin(dot(st ,vec2(12.9898,78.233))) * 43758.5453 * adsk_time), grain);
 
     col = clamp(col, 0.0, 10.0);
 

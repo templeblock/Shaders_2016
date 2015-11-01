@@ -47,10 +47,6 @@ The blur algorithm is the artistry of Lewis Saunders." Name="GLOW">
          <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0">
          </SubUniform>
       </Uniform>
-
-	<Uniform ResDependent="None" Max="2.0" Min="-2.0" Default="0.0" Inc="0.01" Tooltip="" Row="4" Col="3" Page="0" Type="float" DisplayName="Grain the Glow" Name="grain">
-      </Uniform>
-
 		<Uniform ResDependent="None" Max="10.0" Min="-1.0" Default="-1.0" Inc="0.01" Tooltip="Crunch the dark parts of the threshold. Lower number is darker." Row="1" Col="2" Page="0" Type="float" DisplayName="Shadow Depth" Name="shadow_gain">
       </Uniform>
       <Uniform ResDependent="None" Max="10.0" Min="-10.0" Default="2.0" Inc="0.01" Tooltip="Brighten the highlights in the threshold." Row="2" Col="2" Page="0" Type="float" DisplayName="Highlights" Name="highlight_gain">
@@ -160,12 +156,6 @@ The blur algorithm is the artistry of Lewis Saunders." Name="GLOW">
       </Uniform>
 	<Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="5.0" Inc="0.01" Tooltip="The intensity of the glow." Row="1" Col="3" Page="0" Type="float" DisplayName="Brightness" Name="gain">
       </Uniform>
-
-	 <Uniform Type="float" DisplayName="grain" Name="grain">
-         <Duplicate>
-         </Duplicate>
-      </Uniform>
-
    </Shader>
    <Page Name="Glow" Page="0">
       <Col Name="Blur" Col="0" Page="0">
