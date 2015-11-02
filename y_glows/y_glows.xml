@@ -53,7 +53,7 @@ The blur algorithm is the artistry of Lewis Saunders." Name="GLOW">
 
 		<Uniform ResDependent="None" Max="10.0" Min="-1.0" Default="-1.0" Inc="0.01" Tooltip="Crunch the dark parts of the threshold. Lower number is darker." Row="1" Col="2" Page="0" Type="float" DisplayName="Shadow Depth" Name="shadow_gain">
       </Uniform>
-      <Uniform ResDependent="None" Max="10.0" Min="-10.0" Default="2.0" Inc="0.01" Tooltip="Brighten the highlights in the threshold." Row="2" Col="2" Page="0" Type="float" DisplayName="Highlights" Name="highlight_gain">
+      <Uniform ResDependent="None" Max="10.0" Min="-10.0" Default="1.5" Inc="0.01" Tooltip="Brighten the highlights in the threshold." Row="2" Col="2" Page="0" Type="float" DisplayName="Highlights" Name="highlight_gain">
       </Uniform>
 
 	<Uniform ResDependent="None" Max="10.0" Min=".1" Default="1.0" Inc="0.01" Tooltip="Adjust the gamma of the threshold." Row="3" Col="2" Page="0" Type="float" DisplayName="Gamma" Name="gamma">
@@ -158,7 +158,7 @@ The blur algorithm is the artistry of Lewis Saunders." Name="GLOW">
       </Uniform>
       <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass5">
       </Uniform>
-	<Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="5.0" Inc="0.01" Tooltip="The intensity of the glow." Row="1" Col="3" Page="0" Type="float" DisplayName="Brightness" Name="gain">
+	<Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="2.0" Inc="0.01" Tooltip="The intensity of the glow." Row="1" Col="3" Page="0" Type="float" DisplayName="Brightness" Name="gain">
       </Uniform>
 
 	 <Uniform Type="float" DisplayName="grain" Name="grain">
