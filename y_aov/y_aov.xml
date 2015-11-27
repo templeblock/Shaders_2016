@@ -1,8 +1,5 @@
-<ShaderNodePreset SupportsAdaptiveDegradation="0" LimitInputsToTexture="True" Version="1" Description="miles@noesclavo.com
-
-AOV
-
-Combine up to 6 matte passes with various useful operations. Passes can be monochrome or 3 Channel RGB" Name="AOV">
+<?xml version="1.0"?>
+<ShaderNodePreset SupportsAdaptiveDegradation="0" LimitInputsToTexture="True" Version="1" Description="miles@noesclavo.com  AOV  Combine up to 6 matte passes with various useful operations. Passes can be monochrome or 3 Channel RGB" Name="AOV">
    <Shader OutputBitDepth="Output" Index="1">
 
       <Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="ID1" InputColor="100, 60, 20" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_REPEAT" GL_TEXTURE_WRAP_S="GL_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="ID1">
