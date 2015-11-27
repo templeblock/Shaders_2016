@@ -1,0 +1,115 @@
+<ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="miles@noesclavo.com
+
+GRID
+
+Make a grid." Name="GRID">
+   <Shader OutputBitDepth="Output" Index="1">
+
+      <Uniform Index="0" NoInput="Black" Tooltip="" DisplayName="Front" InputType="Front" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
+      </Uniform>
+      <Uniform Index="1" NoInput="White" Tooltip="" DisplayName="Matte" InputType="Matte" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Matte">
+      </Uniform>
+   </Shader>
+
+   <Shader OutputBitDepth="Output" Index="2">
+
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="10.0" Inc="0.5" Tooltip="Width of the lines." Row="0" Col="1" Page="0" Type="float" DisplayName="Line Weight" Name="line_width">
+      </Uniform>
+
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="100.0" Inc="0.5" Tooltip="Size of the grid." Row="1" Col="1" Page="0" Type="float" DisplayName="Grid Size" Name="grid_width">
+      </Uniform>
+
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.5" Tooltip="Translate the grid vertically." Row="3" Col="1" Page="0" Type="float" DisplayName="Translate Y" Name="y_offset">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.5" Tooltip="Translate the grid horizontally." Row="2" Col="1" Page="0" Type="float" DisplayName="Translate X" Name="x_offset">
+      </Uniform>
+
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0" Inc="0.5" Tooltip="Line width horizontal bias." Row="1" Col="3" Page="0" Type="float" DisplayName="Line X" Name="line_x">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0" Inc="0.5" Tooltip="Line width vertical bias." Row="2" Col="3" Page="0" Type="float" DisplayName="Line Y" Name="line_y">
+      </Uniform>
+
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0" Inc="0.5" Tooltip="Grid width horizontal bias." Row="3" Col="3" Page="0" Type="float" DisplayName="Grid X" Name="width_x">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0" Inc="0.5" Tooltip="Grid width vertical bias." Row="4" Col="3" Page="0" Type="float" DisplayName="Grid Y" Name="width_y">
+      </Uniform>
+
+<!--
+	<Uniform ResDependent="None" Max="3" Min="0" Default="0.0" Inc="0.01" Tooltip="" Row="4" Col="0" Page="1" DisplayName="Options" Type="int" Name="options"           ValueType="Popup">
+            <PopupEntry Title="None" Value="0">
+            </PopupEntry>
+            <PopupEntry Title="Keep Aspect" Value="1">
+            </PopupEntry>
+            <PopupEntry Title="Offset Center" Value="2">
+            </PopupEntry>
+            <PopupEntry Title="Do Both" Value="3">
+            </PopupEntry>
+      </Uniform>
+-->
+
+
+
+		  <Uniform Inc="0.1" Tooltip="Color of the lines." Row="0" Col="0" Page="0" IconType="None" ValueType="ColourWheel" Type="vec3" DisplayName="Colour Wheel" Name="grid_color" HueShift="False" AngleName="Hue" IntensityName1="Gain" IntensityName2="Sat">
+         <SubUniform ResDependent="None" Max="1000.0" Min="-1000.0" Default="0.0" Inc="1.">
+         </SubUniform>
+         <SubUniform ResDependent="None" Max="1000.0" Min="-1000.0" Default="100.0" Inc="1.">
+         </SubUniform>
+         <SubUniform ResDependent="None" Max="100.0" Min="0.0" Default="0.0" Inc= "1.">
+         </SubUniform>
+      </Uniform>
+
+
+   </Shader>
+
+   <Shader OutputBitDepth="Output" Index="3">
+
+	<Uniform Inc="0.1" Tooltip="Color of the background." Row="0" Col="2" Page="0" IconType="None" ValueType="ColourWheel" Type="vec3" DisplayName="Back Color" Name="back_color" HueShift="False" AngleName="Hue"
+         IntensityName1="Gain" IntensityName2="Sat">
+         <SubUniform ResDependent="None" Max="1000.0" Min="-1000.0" Default="0.0" Inc="1.">
+         </SubUniform>
+         <SubUniform ResDependent="None" Max="1000.0" Min="-1000.0" Default="0.0" Inc="1.">
+         </SubUniform>
+         <SubUniform ResDependent="None" Max="100.0" Min="0.0" Default="100.0" Inc="1.">
+         </SubUniform>
+      </Uniform>
+
+   </Shader>
+
+   <Shader OutputBitDepth="Output" Index="4">
+
+		 <Uniform Max="1000000" Min="-1000000" Default="0" Inc="1" Tooltip="Working colorspace. Set this to the current working colorspace." Row="0" Col="3" Page="0" DisplayName="Colorspace" Type="int" Name="i_colorspace" ValueType="Popup">
+         <PopupEntry Title="Rec 709" Value="0">
+         </PopupEntry>
+         <PopupEntry Title="sRGB" Value="1">
+         </PopupEntry>
+         <PopupEntry Title="Linear" Value="2">
+         </PopupEntry>
+         <PopupEntry Title="2.2 Gamma" Value="3">
+         </PopupEntry>
+         <PopupEntry Title="1.8 Gamma" Value="4">
+         </PopupEntry>
+      </Uniform>
+
+
+      <Uniform Row="4" Col="1" Page="0" Default="True" Tooltip="Turning this off makes the background color transparent. This exposes the front input through the grid." Type="bool" DisplayName="Make Color 2 Opaque" Name="usebg">
+      </Uniform>
+
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass2">
+      </Uniform>
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass1">
+      </Uniform>
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass3">
+      </Uniform>
+
+   </Shader>
+   <Page Name="GRID" Page="0">
+      <Col Name="Color 1" Col="0" Page="0">
+      </Col>
+      <Col Name="Grid Options" Col="1" Page="0">
+      </Col>
+      <Col Name="Color 2" Col="2" Page="0">
+      </Col>
+      <Col Name="More Options" Col="3" Page="0">
+      </Col>
+   </Page>
+</ShaderNodePreset>
