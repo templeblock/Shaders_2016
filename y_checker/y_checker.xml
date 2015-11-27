@@ -1,0 +1,73 @@
+<ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="miles@noesclavo.com
+
+CHECKER
+
+Make a checkerboard pattern. Great for prototyping color combos." Name="CHECKER">
+   <Shader OutputBitDepth="Output" Index="1">
+
+	<Uniform Index="0" NoInput="Black" Tooltip="" DisplayName="Front" InputType="Front" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
+      </Uniform>
+
+	<Uniform Index="1" NoInput="White" Tooltip="" DisplayName="Matte" InputType="Matte" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Matte">
+      </Uniform>
+
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="100.0" Inc="0.5" Tooltip="Checkerboard size" Row="1" Col="1" Page="0" Type="float" DisplayName="Square Size" Name="size">
+      </Uniform>
+
+		<Uniform Inc="1.0" Tooltip="Foreground Color. Adjust Hue / Gain / Saturation to liking." Row="0" Col="0" Page="0" IconType="None" ValueType="ColourWheel" Type="vec3" DisplayName="Colour Wheel" Name="col1" HueShift="False" AngleName="Hue" IntensityName1="Gain" IntensityName2="Sat">
+			<SubUniform ResDependent="None" Max="1000.0" Min="-1000.0" Default="0.0" Inc="1.0">
+			</SubUniform>
+			<SubUniform ResDependent="None" Max="100.0" Min="-1000.0" Default="100.0" Inc="1.0">
+			</SubUniform>
+			<SubUniform ResDependent="None" Max="100.0" Min="0.0" Default="0.0" Inc="1.0">
+			</SubUniform>
+		</Uniform>
+
+		<Uniform Inc="0.1" Tooltip="Background Color. Adjust Hue / Gain / Saturation to liking." Row="0" Col="2" Page="0" IconType="None" ValueType="ColourWheel" Type="vec3" DisplayName="Colour Wheel" Name="col2" HueShift="False" AngleName="Hue" IntensityName1="Gain" IntensityName2="Sat">
+			<SubUniform ResDependent="None" Max="1000.0" Min="-1000.0" Default="0.0" Inc="1.0">
+			</SubUniform>
+			<SubUniform ResDependent="None" Max="1000.0" Min="-1000.0" Default="0.0" Inc="1.0">
+			</SubUniform>
+			<SubUniform ResDependent="None" Max="100.0" Min="0.0" Default="100.0" Inc="1.0">
+			</SubUniform>
+		</Uniform>
+		<Uniform Row="2" Col="1" Page="0" Default="True" Tooltip="Turning this off makes the background color transparent. This exposes the front input through the checkerboard." Type="bool" DisplayName="Make Color 2 Opaque" Name="usebg">
+		</Uniform>
+
+
+		<Uniform Max="1000000" Min="-1000000" Default="0" Inc="1" Tooltip="Working colorspace. Set this to the current working colorspace. This insures a linear blend (no dark edges)." Row="0" Col="0" Page="1" DisplayName="Colorspace" Type="int" Name="i_colorspace" ValueType="Popup">
+         <PopupEntry Title="Rec 709" Value="0">
+         </PopupEntry>
+         <PopupEntry Title="sRGB" Value="1">
+         </PopupEntry>
+         <PopupEntry Title="Linear" Value="2">
+         </PopupEntry>
+         <PopupEntry Title="2.2 Gamma" Value="3">
+         </PopupEntry>
+         <PopupEntry Title="1.8 Gamma" Value="4">
+         </PopupEntry>
+      </Uniform>
+
+   </Shader>
+
+
+	<Shader OutputBitDepth="Output" Index="2">
+      <Uniform Type="int" DisplayName="i_colorspace" Name="i_colorspace">
+         <Duplicate>
+         </Duplicate>
+      </Uniform>
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass1">
+      </Uniform>
+   </Shader>
+
+   <Page Name="CHECKER" Page="0">
+      <Col Name="Color 1" Col="0" Page="0">
+      </Col>
+      <Col Name="Options" Col="1" Page="0">
+      </Col>
+      <Col Name="Color 2" Col="2" Page="0">
+      </Col>
+   </Page>
+   <Page Name="COLORSPACE" Page="1">
+   </Page>
+</ShaderNodePreset>
