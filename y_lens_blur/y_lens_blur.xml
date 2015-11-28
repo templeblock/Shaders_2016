@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
-<ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="miles@noesclavo.com, ivar@inferno-op.com.  The gaussian blur algorithm is the artistry of Lewis Saunders.  Helpful inspiration and troubleshooting by the great crew at  https://www.facebook.com/groups/1380015128921288/  Create a lens blur with custom kernels. Alpha output is a representation of the focal map.  Helpful links. //http://www.crytek.com/download/Sousa_Graphics_Gems_CryENGINE3.pdf //http://psgraphics.blogspot.com/2011/01/improved-code-for-concentric-map.html //http://ivizlab.sfu.ca/papers/cgf2012.pdf //https://www.shadertoy.com/view/MtlGRn " Name="LENS_BLUR">
+<ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="miles@noesclavo.com, ivar@inferno-op.com.
+
+LENS BLUR
+
+The gaussian blur algorithm is the artistry of Lewis Saunders.  Helpful inspiration and troubleshooting by the great crew at  https://www.facebook.com/groups/1380015128921288/  Create a lens blur with custom kernels. Alpha output is a representation of the focal map.  Helpful links. //http://www.crytek.com/download/Sousa_Graphics_Gems_CryENGINE3.pdf //http://psgraphics.blogspot.com/2011/01/improved-code-for-concentric-map.html //http://ivizlab.sfu.ca/papers/cgf2012.pdf //https://www.shadertoy.com/view/MtlGRn " Name="LENS_BLUR">
   <Shader OutputBitDepth="Output" Index="1">
     <Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="Front" InputType="Front" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
       </Uniform>

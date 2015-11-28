@@ -1,5 +1,7 @@
 <ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="miles@noesclavo.com
-OFF SWITCH" Name="OFF_SWITCH">
+
+OFF SWITCH
+" Name="OFF_SWITCH">
    <Shader OutputBitDepth="Output" Index="1">
       <Uniform ResDependent="None" Max="1000000.0" Min="000000.0" Default="150.0" Inc="0.5" Tooltip="Size of the circles." Row="0" Col="1" Page="0" Type="float" DisplayName="Size" Name="circle_width">
       </Uniform>
