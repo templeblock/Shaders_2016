@@ -1,0 +1,37 @@
+<ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="miles@noesclavo.com" Name="OFF_SWITCH">
+   <Shader OutputBitDepth="Output" Index="1">
+      <Uniform ResDependent="None" Max="1000000.0" Min="000000.0" Default="150.0" Inc="0.5" Tooltip="Size of the circles." Row="0" Col="1" Page="0" Type="float" DisplayName="Size" Name="circle_width">
+      </Uniform>
+	  <!--
+      <Uniform Index="0" NoInput="Black" Tooltip="" DisplayName="Front" InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
+      </Uniform>
+	  -->
+      <Uniform Max="1000000" Min="-1000000" Default="14" Inc="1" Tooltip="" Row="1" Col="1" Page="0" Type="int" DisplayName="Number" Name="num_circles">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="000000.0" Default="0.25" Inc="0.01" Tooltip="" Row="0" Col="2" Page="0" Type="float" DisplayName="Radius" Name="radius">
+      </Uniform>
+
+      <Uniform Row="4" Col="0" Page="0" Default="False" Tooltip="" Type="bool" DisplayName="Mirror Grad" Name="mirror">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.5" Tooltip="" Row="2" Col="0" Page="0" Type="float" DisplayName="Rotation" Name="grad_rotation">
+      </Uniform>
+      <Uniform ResDependent="None" Max="10.0" Min="000000.0" Default="1.0" Inc="0.01" Tooltip="" Row="3" Col="0" Page="0" Type="float" DisplayName="Gamma" Name="gamma">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1.0" Min="000000.0" Default="0.5" Inc="0.01" Tooltip="" Row="1" Col="0" Page="0" Type="float" DisplayName="Falloff" Name="t">
+      </Uniform>
+      <Uniform ResDependent="None" Max="100" Min="000000" Default="4" Inc="1" Tooltip="" Row="0" Col="0" Page="0" Type="int" DisplayName="Samples" Name="samples">
+      </Uniform>
+	   <Uniform Row="0" Col="3" Page="0" Default="False" Tooltip="" Type="bool" DisplayName="Invert Grad" Name="invert">
+	         </Uniform>
+   </Shader>
+   <Page Name="Page 1" Page="0">
+      <Col Name="Angle Grad" Col="0" Page="0">
+      </Col>
+      <Col Name="Circles" Col="1" Page="0">
+      </Col>
+      <Col Name="Overall" Col="2" Page="0">
+      </Col>
+      <Col Name="IO" Col="3" Page="0">
+      </Col>
+   </Page>
+</ShaderNodePreset>
