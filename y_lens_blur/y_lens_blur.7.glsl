@@ -1,14 +1,17 @@
 #version 120
 
 #define ratio adsk_result_frameratio
+#define INPUT1 adsk_results_pass6
+#define INPUT2 adsk_results_pass2
 
 uniform float ratio;
 uniform float adsk_result_w, adsk_result_h;
 vec2 res = vec2(adsk_result_w, adsk_result_h);
 vec2 texel = vec2(1.0) / res;
 
-uniform sampler2D Front;
-uniform sampler2D Matte;
+uniform sampler2D INPUT1;
+uniform sampler2D INPUT2;
+uniform bool alpha_is_depth;
 
 uniform int i_colorspace;
 
@@ -127,9 +130,9 @@ vec3 do_colorspace(vec3 front, int op)
         } else if (i_colorspace == 2) {
             //linear
         } else if (i_colorspace == 3) {
-            front = adjust_gamma(front, 2.2);
+            front = adjust_gamma(front, 1.0 / 2.2);
         } else if (i_colorspace == 4) {
-            front = adjust_gamma(front, 1.8);
+            front = adjust_gamma(front, 1.0 / 1.8);
         }
     }
 
@@ -139,11 +142,12 @@ vec3 do_colorspace(vec3 front, int op)
 void main(void) {
     vec2 st = gl_FragCoord.xy / res;
 
-    vec3 front = texture2D(Front, st).rgb;
-    front = do_colorspace(front, 0);
-    float matte = texture2D(Matte, st).r;
+    vec4 front = texture2D(INPUT1, st);
+    front.rgb = do_colorspace(front.rgb, 1);
 
-    gl_FragColor = vec4(front, matte);
+    if (alpha_is_depth) {
+        front.a = texture2D(INPUT2, st).a;
+    }
+
+    gl_FragColor = front;
 }
-
-

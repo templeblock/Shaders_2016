@@ -2,13 +2,13 @@
 
 // Change the folling 4 lines to suite
 //#define STRENGTH adsk_results_pass2
-//#define VERTICAL 
+#define VERTICAL 
 //#define STRENGTH_CHANNEL 
-#define INPUT0 adsk_results_pass1
 #define INPUT1 adsk_results_pass3
+#define INPUT2 adsk_results_pass2
 
-uniform sampler2D INPUT0;
 uniform sampler2D INPUT1;
+uniform sampler2D INPUT2;
 
 #define PI 3.141592653589793238462643383279502884197969
 
@@ -48,7 +48,7 @@ vec4 gblur()
 		strength = texture2D(STRENGTH, gl_FragCoord.xy / res).a;
 	#endif
 
-	strength = texture2D(INPUT1, xy * texel).a;
+	strength = texture2D(INPUT2, xy * texel).r;
 
 	float br = blur_red * blur_amount * bias * strength;
 	float bg = blur_green * blur_amount * bias * strength;
@@ -85,7 +85,5 @@ vec4 gblur()
 
 void main(void)
 {
-	vec4 blur = gblur();
-
-	gl_FragColor = blur;
+	gl_FragColor = gblur();
 }
