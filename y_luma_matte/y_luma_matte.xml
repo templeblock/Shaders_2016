@@ -1,30 +1,26 @@
-<ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="miles@noesclavo.com
-
-LUMA MATTE
-
-Create a matte based upan a specific luminance value." Name="LUMA_MATTE">
+<ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="" Name="Preset Name">
    <Shader OutputBitDepth="Output" Index="1">
-      <Uniform ResDependent="None" Max="10.0" Min="00000.0" Default="1.0" Inc="0.01" Tooltip="" Row="0" Col="1" Page="0" Type="float" DisplayName="Blacks" Name="aperture">
+      <Uniform ResDependent="None" Max="2000000.0" Min="-1.0" Default="1.0" Inc="0.01" Tooltip="" Row="0" Col="1" Page="0" Type="float" DisplayName="Blacks" Name="aperture">
       </Uniform>
-      <Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="Front" InputType="Front" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
+      <Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="Front" InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
       </Uniform>
-      <Uniform ResDependent="None" Max="2.0" Min="-1.0" Default="0.5" Inc="0.01" Tooltip="Grayscale value." Row="1" Col="0" Page="0" Type="float" DisplayName="Center Luma" Name="focal_distance">
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="1" Col="0" Page="0" Type="float" DisplayName="Center Luma" Name="focal_distance" UIConditionSource="pick_depth" UIConditionValue="False" UIConditionType="Hide">
       </Uniform>
-      <Uniform Row="0" Col="0" Page="0" Default="True" Tooltip="Enable to pick a value from the frame." Type="bool" DisplayName="Pick Center" Name="pick_depth">
+      <Uniform Row="0" Col="0" Page="0" Default="False" Tooltip="" Type="bool" DisplayName="Pick Luminance" Name="pick_depth" UIConditionSource="pick_depth">
       </Uniform>
-      <Uniform ResDependent="None" Max="10.0" Min="-10.0" Default="0.0" Inc="0.01" Tooltip="" Row="1" Col="1" Page="0" Type="float" DisplayName="Whites" Name="focal_length">
+      <Uniform ResDependent="None" Max="2.0" Min="-1.0" Default="0.0" Inc="0.01" Tooltip="" Row="1" Col="1" Page="0" Type="float" DisplayName="Whites" Name="focal_length">
       </Uniform>
-      <Uniform Inc="0.01" Tooltip="" Row="1" Col="0" Page="0" IconType="Pick" Type="vec2" DisplayName="Center Luma" Name="depth_pick">
-         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.5">
+      <Uniform Inc="0.01" Tooltip="" Row="1" Col="0" Page="0" IconType="Pick" Type="vec2" DisplayName="Pick Luminance" Name="depth_pick" UIConditionSource="pick_depth" UIConditionValue="True" UIConditionType="Hide" UIConditionInvert="False">
+         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.2">
          </SubUniform>
-         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.5">
+         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.2">
          </SubUniform>
       </Uniform>
    </Shader>
    <Page Name="Page 1" Page="0">
-      <Col Name="Sample Value" Col="0" Page="0">
+      <Col Name="Column 1" Col="0" Page="0">
       </Col>
-      <Col Name="Ranges" Col="1" Page="0">
+      <Col Name="Column 2" Col="1" Page="0">
       </Col>
    </Page>
 </ShaderNodePreset>

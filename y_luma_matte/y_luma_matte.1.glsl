@@ -21,15 +21,11 @@ uniform float adsk_result_w, adsk_result_h;
 vec2 res = vec2(adsk_result_w, adsk_result_h);
 vec2 texel = vec2(1.0) / res;
 
-
 uniform sampler2D INPUT1;
 
-uniform float far;
 uniform float aperture;
-uniform float focal_distance;
 uniform float focal_length;
-float max_coc = 1.0;
-uniform bool show_depth;
+uniform float focal_distance;
 uniform vec2 depth_pick;
 uniform bool pick_depth;
 
