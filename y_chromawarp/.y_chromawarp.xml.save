@@ -1,0 +1,67 @@
+<ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="miles@noesclavo.com
+
+CHROMA WARP
+
+Creates a chromatic aberration effect." Name="CHROMA_WARP">
+
+
+	<Shader OutputBitDepth="Output" Index="1">
+      <Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="Front" InputType="Front" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
+      </Uniform>
+      <Uniform Index="2" NoInput="White" Tooltip="" DisplayName="Matte" InputType="Matte" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Matte">
+      </Uniform>
+   </Shader>
+   <Shader OutputBitDepth="Output" Index="2">
+      <Uniform Index="1" NoInput="Black" Tooltip="" DisplayName="Back" InputType="Back" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Back">
+      </Uniform>
+      <Uniform Index="3" NoInput="White" Tooltip="" DisplayName="Strength" InputColor="80, 80, 20" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Strength">
+      </Uniform>
+   </Shader>
+
+   <Shader OutputBitDepth="Output" Index="3">
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="1.0" Tooltip="Offset channels horizontally." Row="0" Col="0" Page="0" Type="float" DisplayName="Position X" Name="pos_x">
+      </Uniform>
+      <Uniform Inc="0.01" Tooltip="Choose the center from where to scale the channels. Use light icon to make it more interactive." Row="0" Col="2" Page="0" IconType="Light" Type="vec2" DisplayName="Center" Name="center">
+         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.5">
+         </SubUniform>
+         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.5">
+         </SubUniform>
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0" Inc="1." Tooltip="Offset channels by scaling them." Row="0" Col="1" Page="0" Type="float" DisplayName="Scale" Name="scale">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0" Inc="1." Tooltip="Horizontal scale bias." Row="1" Col="1" Page="0" Type="float" DisplayName="Scale X" Name="scale_x">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0" Inc="1." Tooltip="Vertical scale bias." Row="2" Col="1" Page="0" Type="float" DisplayName="Scale Y" Name="scale_y">
+      </Uniform>
+
+	  <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass1">
+      </Uniform>
+	  <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass2">
+      </Uniform>
+
+	<Uniform Row="1" Col="3" Page="0" Default="True" Tooltip="Apply the overall operation to the matte." Type="bool" DisplayName="Warp Matte" Name="warp_matte">
+      </Uniform>
+
+
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="1.0" Tooltip="Offset channels vertically" Row="1" Col="0" Page="0" Type="float" DisplayName="Position Y" Name="pos_y">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="1.0" Tooltip="Offset channels in zed. Similar to scale minus the center option." Row="2" Col="0" Page="0" Type="float" DisplayName="Position Z" Name="pos_z">
+      </Uniform>
+	  <Uniform Row="2" Col="3" Page="0" Default="True" Tooltip="" Type="bool" DisplayName="Comp over Front" Name="front_is_back">
+	        </Uniform>
+	  <Uniform Row="3" Col="3" Page="0" Default="False" Tooltip="Use matte input as strength channel as well as alpha." Type="bool" DisplayName="Matte is Strength" Name="matte_is_strength">
+	        </Uniform>
+      <Uniform Max="1000000" Min="-1000000" Default="3" Inc="1" Tooltip="Samples. Higher samples give a smoother warp." Row="0" Col="3" Page="0" Type="int" DisplayName="Samples" Name="samples">
+      </Uniform>
+   </Shader>
+   <Page Name="CHROMAWARP" Page="0">
+      <Col Name="Position" Col="0" Page="0">
+      </Col>
+      <Col Name="Scale" Col="1" Page="0">
+      </Col>
+      <Col Name="Center" Col="2" Page="0">
+      </Col>
+      <Col Name="I / O" Col="3" Page="0">
+      </Col>
+   </Page>
+</ShaderNodePreset>
