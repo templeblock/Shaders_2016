@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="miles@noesclavo.com
+
+BILAT
+
+A bilateral filter, with a few more options, and the abiltiy to intake a matte.
+
+https://www.shadertoy.com/view/4dfGDH
+https://github.com/SableRaf/Filters4Processing/blob/master/sketches/Bilateral/data/bilateral.glsl" Name="BILAT">
+	<Shader OutputBitDepth="Output" Index="1">
+		<Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="Front" InputType="Front" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
+    	</Uniform>
+		<Uniform Index="1" NoInput="White" Tooltip="" DisplayName="Front" InputType="Matte" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Matte">
+    	</Uniform>
+		<Uniform Max="1000000" Min="-1000000" Default="0" Inc="1" Tooltip="Working colorspace. Set this to the current working colorspace. This insures a linear blur (no dark   edges)." Row="0" Col="0" Page="0" DisplayName="Colorspace" Type="int" Name="i_colorspace" ValueType="Popup">
+         <PopupEntry Title="Rec 709" Value="0">
+         </PopupEntry>
+         <PopupEntry Title="sRGB" Value="1">
+         </PopupEntry>
+         <PopupEntry Title="Linear" Value="2">
+         </PopupEntry>
+         <PopupEntry Title="2.2 Gamma" Value="3">
+         </PopupEntry>
+         <PopupEntry Title="1.8 Gamma" Value="4">
+         </PopupEntry>
+      </Uniform>
+	</Shader>
+	<Shader OutputBitDepth="Output" Index="2">
+		<Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass1">
+      </Uniform>
+	</Shader>
+	<Shader OutputBitDepth="Output" Index="3">
+		<Uniform ResDependent="None" Max="10.0" Min="0.1" Default="1.0" Inc="1" Tooltip="" Row="2" Col="1" Page="0" Type="int" DisplayName="Detail" Name="detail">
+      </Uniform>
+		<Uniform ResDependent="None" Max="10.0" Min="1.0" Default="5.0" Inc="0.5" Tooltip="" Row="0" Col="1" Page="0" Type="float" DisplayName="Strength" Name="amount">
+      </Uniform>
+		<Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass2">
+      </Uniform>
+		<Uniform Max="50" Min="1" Default="10" Inc="1" Tooltip="" Row="1" Col="1" Page="0" Type="int" DisplayName="Samples" Name="samples">
+      </Uniform>
+	</Shader>
+	<Shader OutputBitDepth="Output" Index="3">
+		<Uniform Type="int" DisplayName="i_colorspace" Name="i_colorspace">
+			<Duplicate>
+         </Duplicate>
+		</Uniform>
+		<Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass3">
+      </Uniform>
+	</Shader>
+	<Page Name="BILAT" Page="0">
+		<Col Name="Working Colorspace" Col="0" Page="0">
+      </Col>
+		<Col Name="Bilateral Options" Col="1" Page="0">
+      </Col>
+	</Page>
+</ShaderNodePreset>
