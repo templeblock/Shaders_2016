@@ -7,7 +7,7 @@ Pull a luma key based on a specific luminance value." Name="LUMA_MATTE">
 	<Shader OutputBitDepth="Output" Index="1">
 		<Uniform ResDependent="None" Max="2000000.0" Min="-1.0" Default="1.0" Inc="0.01" Tooltip="" Row="0" Col="1" Page="0" Type="float" DisplayName="Blacks" Name="aperture">
       </Uniform>
-		<Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="Front" InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
+		<Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="Front" InputType="Front" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
       </Uniform>
 		<Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="1" Col="0" Page="0" Type="float" DisplayName="Center Luma" Name="focal_distance" UIConditionSource="pick_depth" UIConditionValue="False" UIConditionType="Hide">
       </Uniform>
