@@ -1,16 +1,21 @@
 #version 120
 
 #define ratio adsk_result_frameratio
+#define INPUT1 adsk_results_pass7
+#define INPUT2 adsk_results_pass2
+#define INPUT3 adsk_results_pass3
 
 uniform float ratio;
 uniform float adsk_result_w, adsk_result_h;
 vec2 res = vec2(adsk_result_w, adsk_result_h);
 vec2 texel = vec2(1.0) / res;
 
-float adsk_getLuminance( in vec3 color );
+uniform sampler2D INPUT1;
+uniform sampler2D INPUT2;
+uniform sampler2D INPUT3;
 
-uniform sampler2D Front;
-uniform sampler2D Matte;
+uniform bool alpha_is_depth;
+uniform bool show_threshold;
 
 uniform int i_colorspace;
 
@@ -129,9 +134,9 @@ vec3 do_colorspace(vec3 front, int op)
         } else if (i_colorspace == 2) {
             //linear
         } else if (i_colorspace == 3) {
-            front = adjust_gamma(front, 2.2);
+            front = adjust_gamma(front, 1.0 / 2.2);
         } else if (i_colorspace == 4) {
-            front = adjust_gamma(front, 1.8);
+            front = adjust_gamma(front, 1.0 / 1.8);
         }
     }
 
@@ -141,13 +146,16 @@ vec3 do_colorspace(vec3 front, int op)
 void main(void) {
     vec2 st = gl_FragCoord.xy / res;
 
-    vec3 front = texture2D(Front, st).rgb;
-    front = do_colorspace(front, 0);
+    vec4 front = texture2D(INPUT1, st);
+    front.rgb = do_colorspace(front.rgb, 1);
 
-    float luma = adsk_getLuminance(front);
-    float matte = texture2D(Matte, st).r;
+    if (alpha_is_depth) {
+        front.a = 1.0 - texture2D(INPUT2, st).a;
+    }
 
-    gl_FragColor = vec4(front, matte);
+    if (show_threshold) {
+        front = texture2D(INPUT3, st).aaaa;
+    }
+
+    gl_FragColor = front;
 }
-
-

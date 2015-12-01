@@ -4,6 +4,8 @@
 #define INPUT1 adsk_results_pass6
 #define INPUT2 adsk_results_pass2
 
+float adsk_getLuminance( in vec3 color );
+
 uniform float ratio;
 uniform float adsk_result_w, adsk_result_h;
 vec2 res = vec2(adsk_result_w, adsk_result_h);
@@ -11,143 +13,82 @@ vec2 texel = vec2(1.0) / res;
 
 uniform sampler2D INPUT1;
 uniform sampler2D INPUT2;
-uniform bool alpha_is_depth;
 
-uniform int i_colorspace;
+uniform float chroma_width;
 
-vec3 from_sRGB(vec3 col)
+bool isInTex( const vec2 coords )
 {
-    if (col.r >= 0.0) {
-         col.r = pow((col.r +.055)/ 1.055, 2.4);
-    }
-
-    if (col.g >= 0.0) {
-         col.g = pow((col.g +.055)/ 1.055, 2.4);
-    }
-
-    if (col.b >= 0.0) {
-         col.b = pow((col.b +.055)/ 1.055, 2.4);
-    }
-
-    return col;
+        return coords.x >= 0.0 && coords.x <= 1.0 &&
+                    coords.y >= 0.0 && coords.y <= 1.0;
 }
 
-vec3 from_rec709(vec3 col)
+vec2 barrelDistortion(vec2 coord, float amt)
 {
-    if (col.r < .081) {
-         col.r /= 4.5;
-    } else {
-         col.r = pow((col.r +.099)/ 1.099, 1.0 / .45);
-    }
 
-    if (col.g < .081) {
-         col.g /= 4.5;
-    } else {
-         col.g = pow((col.g +.099)/ 1.099, 1.0 / .45);
-    }
-
-    if (col.b < .081) {
-         col.b /= 4.5;
-    } else {
-         col.b = pow((col.b +.099)/ 1.099, 1.0 / .45);
-    }
-
-    return col;
+    vec2 cc = gl_FragCoord.xy/res.xy  - vec2(0.5);
+    float distortion = dot(cc * .3, cc);
+    return coord + cc * amt * -.05;
 }
 
-vec3 to_rec709(vec3 col)
+vec4 offset_color(float amount)
 {
-    if (col.r < .018) {
-         col.r *= 4.5;
-    } else if (col.r >= 0.0) {
-         col.r = (1.099 * pow(col.r, .45)) - .099;
-    }
+    //when times goes past half samples lo is black;
+    float lo = step(amount ,0.5);
+    float hi = 1.0 - lo;
 
-    if (col.g < .018) {
-         col.g *= 4.5;
-    } else if (col.g >= 0.0) {
-         col.g = (1.099 * pow(col.g, .45)) - .099;
-    }
+    float a = 1.0 / 6.0;
+    float b = 5.0 / 6.0;
 
-    if (col.b < .018) {
-         col.b *= 4.5;
-    } else if (col.b >= 0.0) {
-         col.b = (1.099 * pow(col.b, .45)) - .099;
-    }
+    // times gets closer to samples, x gets brighter, when times == samples, x is clamped to white;
+    float x = clamp( (amount - a) / (b - a), 0.0, 1.0 );
 
+    //when x gets brigher, w becomes darker
+    float w = clamp(1.0 - abs(2.0 * x - 1.0), 0.0, 1.0);
 
-    return col;
-}
+    // times starts red and as it gets closer to samples it goes orange, green, blue
+    vec3 rgb = vec3(lo, 1.0, hi) * vec3(1.0 - w, w, 1.0 - w);
 
-vec3 to_sRGB(vec3 col)
-{
-    if (col.r >= 0.0) {
-         col.r = (1.055 * pow(col.r, 1.0 / 2.4)) - .055;
-    }
+    // if times starts at 0 and goes to 3, the result is, dark, bright, darker dark
+    //float lum =  adsk_getLuminance(rgb);
+    float lum = adsk_getLuminance(rgb);
 
-    if (col.g >= 0.0) {
-         col.g = (1.055 * pow(col.g, 1.0 / 2.4)) - .055;
-    }
+    vec4 color = vec4(rgb, lum);
 
-    if (col.b >= 0.0) {
-         col.b = (1.055 * pow(col.b, 1.0 / 2.4)) - .055;
-    }
-
-    return col;
-}
-
-vec3 adjust_gamma(vec3 col, float gamma)
-{
-    col.r = pow(col.r, gamma);
-    col.g = pow(col.g, gamma);
-    col.b = pow(col.b, gamma);
-
-    return col;
-}
-
-vec3 do_colorspace(vec3 front, int op)
-{
-    if (op == 0)
-    {
-        if (i_colorspace == 0) {
-            front = from_rec709(front);
-        } else if (i_colorspace == 1) {
-            front = from_sRGB(front);
-        } else if (i_colorspace == 2) {
-            //linear
-        } else if (i_colorspace == 3) {
-            front = adjust_gamma(front, 2.2);
-        } else if (i_colorspace == 4) {
-            front = adjust_gamma(front, 1.8);
-        }
-    }
-    else if (op == 1)
-    {
-        if (i_colorspace == 0) {
-            front = to_rec709(front);
-        } else if (i_colorspace == 1) {
-            front = to_sRGB(front);
-        } else if (i_colorspace == 2) {
-            //linear
-        } else if (i_colorspace == 3) {
-            front = adjust_gamma(front, 1.0 / 2.2);
-        } else if (i_colorspace == 4) {
-            front = adjust_gamma(front, 1.0 / 1.8);
-        }
-    }
-
-    return front;
+    return color;
 }
 
 void main(void) {
     vec2 st = gl_FragCoord.xy / res;
 
     vec4 front = texture2D(INPUT1, st);
-    front.rgb = do_colorspace(front.rgb, 1);
+    float strength = texture2D(INPUT2, st).a;
+    vec4 warped = vec4(0.0);
+    vec4 total = vec4(0.0);
 
-    if (alpha_is_depth) {
-        front.a = texture2D(INPUT2, st).a;
+    float samples = 24.0;
+    float sample_norm = 1.0 / samples;
+
+    for (int i = 0; i < samples; i++)
+    {
+        float amount = float(i) * sample_norm;
+        vec4 color = offset_color(amount);
+
+        total += color;
+
+        vec2 coords = st;
+
+        coords = barrelDistortion(coords, chroma_width * amount * strength);
+
+        /*
+        if (isInTex(coords))
+        {
+            warped += color * texture2D(INPUT1, coords);
+        }
+        */
+        warped += color * texture2D(INPUT1, coords);
     }
 
-    gl_FragColor = front;
+    warped /= total;
+
+    gl_FragColor = warped;
 }

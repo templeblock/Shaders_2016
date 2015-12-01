@@ -2,12 +2,11 @@
 
 // Change the folling 4 lines to suite
 //#define STRENGTH adsk_results_pass2
-//#define VERTICAL 
+#define VERTICAL 
 //#define STRENGTH_CHANNEL 
 #define INPUT1 adsk_results_pass4
 #define INPUT2 adsk_results_pass2
 
-uniform sampler2D INPUT0;
 uniform sampler2D INPUT1;
 uniform sampler2D INPUT2;
 
@@ -86,7 +85,5 @@ vec4 gblur()
 
 void main(void)
 {
-	vec4 blur = gblur();
-
-	gl_FragColor = blur;
+	gl_FragColor = gblur();
 }

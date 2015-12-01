@@ -6,12 +6,10 @@
 
 #extension GL_ARB_shader_texture_lod : enable
 
+#define INPUT0 adsk_results_pass1
 #define INPUT1 Depth
 #define ratio adsk_result_frameratio
 #define PI 3.141592653589793238462643383279502884197969
-#define fstops_min 0.0
-#define fstops_max 4.0
-#define max_focal 10.0
 
 float adsk_getLuminance( in vec3 color );
 float adsk_highlights( in float pixel, in float halfPoint );
@@ -22,20 +20,24 @@ vec2 res = vec2(adsk_result_w, adsk_result_h);
 vec2 texel = vec2(1.0) / res;
 
 
+uniform sampler2D INPUT0;
 uniform sampler2D INPUT1;
 
 uniform float far;
 uniform float aperture;
 uniform float focal_distance;
 uniform float focal_length;
-float max_coc = 1.0;
-uniform bool show_depth;
 uniform vec2 depth_pick;
 uniform bool pick_depth;
+
+uniform float gain;
+uniform float threshold;
+uniform bool show_threshold;
 
 void main(void) {
 	vec2 st = gl_FragCoord.xy / res;
 
+	vec4 front = texture2D(INPUT0, st);
 	float depth = texture2D(INPUT1, st).r;
 	depth = clamp(depth, 0.0001, .9999);
 
@@ -45,13 +47,19 @@ void main(void) {
 		fp = texture2D(INPUT1, depth_pick).r;
 	}
 
-	float blur_factor = 1.0 - smoothstep(fp - focal_length, depth - focal_length, depth);
-	blur_factor += 1.0 - smoothstep(fp + focal_length, depth + focal_length, depth);
-	blur_factor = mix(blur_factor, 1.0, 1.0 - distance(fp, depth));
+	float blur_factor;
+
+	blur_factor = distance(fp, depth) * aperture;
+    blur_factor = (1.0 - blur_factor) * focal_length;
 	blur_factor = 1.0 - blur_factor;
-	blur_factor *= aperture;
 
-	blur_factor = clamp(blur_factor, 0.0, 1.0);
+	float luma = adsk_getLuminance(front.rgb);
+	float t = step(threshold, luma) * blur_factor;
+	front.rgb = mix(front.rgb, front.rgb * vec3(gain), t); 
 
-	gl_FragColor = vec4(blur_factor);
+	if (show_threshold) {
+		front.rgb = vec3(t);
+	}
+
+	gl_FragColor = vec4(front.rgb, blur_factor);
 }
