@@ -22,10 +22,10 @@ Pull a luma key based on a specific luminance value." Name="LUMA_MATTE">
          </SubUniform>
 		</Uniform>
 	</Shader>
-	<Page Name="Page 1" Page="0">
-		<Col Name="Column 1" Col="0" Page="0">
+	<Page Name="LUMA_MATTE" Page="0">
+		<Col Name="Pick Luminance" Col="0" Page="0">
       </Col>
-		<Col Name="Column 2" Col="1" Page="0">
+		<Col Name="Tolerence Options" Col="1" Page="0">
       </Col>
 	</Page>
 </ShaderNodePreset>
