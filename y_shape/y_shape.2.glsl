@@ -189,5 +189,5 @@ void main(void) {
 
     comp = do_colorspace(comp, 1);
     
-    gl_FragColor = vec4(comp, matte);
+    gl_FragColor = vec4(comp, shape.a);
 }
