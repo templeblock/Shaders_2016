@@ -13,9 +13,6 @@
 #define fstops_max 4.0
 #define max_focal 10.0
 
-float adsk_getLuminance( in vec3 color );
-float adsk_highlights( in float pixel, in float halfPoint );
-
 uniform float ratio;
 uniform float adsk_result_w, adsk_result_h;
 vec2 res = vec2(adsk_result_w, adsk_result_h);
@@ -28,12 +25,47 @@ uniform float focal_length;
 uniform float focal_distance;
 uniform vec2 depth_pick;
 uniform bool pick_depth;
+uniform bool use_rgb;
+uniform vec3 rgb;
+uniform float falloff_u;
+uniform float falloff_v;
+
+vec3 to_yuv(vec3 col)
+{
+    mat3 yuv = mat3
+    (
+        .2126, .7152, .0722,
+        -.09991, -.33609, .436,
+        .615, -.55861, -.05639
+    );
+
+    return col * yuv;
+}
+
+vec3 to_rgb(vec3 col)
+{
+    mat3 rgb = mat3
+    (
+        1.0, 0.0, 1.28033,
+        1.0, -.21482, -.38059,
+        1.0, 2.12798, 0.0
+    );
+
+    return col * rgb;
+}
 
 void main(void) {
 	vec2 st = gl_FragCoord.xy / res;
 
 	vec3 front = texture2D(INPUT1, st).rgb;
-	float depth = adsk_getLuminance(front);
+	vec3 yuv_front = to_yuv(front);
+	vec3 yuv_pick = to_yuv(rgb);
+
+	vec3 d = vec3(1.0 - distance(yuv_front, yuv_pick) * vec3(1.0, falloff_u, falloff_v));
+	float max_d = clamp(max(d.g, d.b), 0.0, 1.0);
+
+	float depth = yuv_front.r;
+
 	depth = clamp(depth, 0.0000, 1.0);
 
 	float fp = focal_distance;
@@ -42,13 +74,14 @@ void main(void) {
 		fp = texture2D(INPUT1, depth_pick).r;
 	}
 
-	float blur_factor = 1.0 - smoothstep(fp - focal_length, depth - focal_length, depth);
-	blur_factor += 1.0 - smoothstep(fp + focal_length, depth + focal_length, depth);
-	blur_factor = mix(blur_factor, 1.0, 1.0 - distance(fp, depth));
-	blur_factor = 1.0 - blur_factor;
-	blur_factor *= aperture;
-
+	float blur_factor = distance(fp, depth) * aperture;
+	blur_factor = (1.0 - blur_factor) * focal_length;
 	blur_factor = clamp(blur_factor, 0.0, 1.0);
+	float matte = blur_factor;
 
-	gl_FragColor = vec4(front, 1.0 - blur_factor);
+	if (use_rgb) {
+		matte = min(matte, max_d);
+	}
+
+	gl_FragColor = vec4(front,  matte);
 }
