@@ -3,6 +3,7 @@
 #define ratio adsk_result_frameratio
 #define INPUT2 adsk_results_pass2
 #define INPUT3 adsk_results_pass3
+#define INPUT4 adsk_results_pass4
 #define INPUT1 adsk_results_pass7
 
 uniform float ratio;
@@ -13,6 +14,7 @@ vec2 texel = vec2(1.0) / res;
 uniform sampler2D INPUT1;
 uniform sampler2D INPUT2;
 uniform sampler2D INPUT3;
+uniform sampler2D INPUT4;
 
 uniform bool alpha_is_depth;
 uniform bool show_threshold;
