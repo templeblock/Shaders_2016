@@ -24,6 +24,7 @@ uniform sampler2D INPUT1;
 uniform float width;
 uniform float gain;
 uniform float threshold;
+uniform bool show_threshold;
 
 void main(void) {
 	vec2 st = gl_FragCoord.xy / res;
@@ -38,5 +39,11 @@ void main(void) {
 	t = clamp(t, 0.0, 1.0);
 	front.rgb = mix(front.rgb, front.rgb * vec3(gain), t); 
 
-	gl_FragColor = vec4(front.rgb, t);
+	float matte = front.a;
+
+	if (show_threshold) {
+		matte = t;
+	}
+
+	gl_FragColor = vec4(front.rgb, matte);
 }

@@ -1,9 +1,9 @@
 #version 120
 
 #define ratio adsk_result_frameratio
-#define INPUT1 adsk_results_pass7
 #define INPUT2 adsk_results_pass2
 #define INPUT3 adsk_results_pass3
+#define INPUT1 adsk_results_pass7
 
 uniform float ratio;
 uniform float adsk_result_w, adsk_result_h;

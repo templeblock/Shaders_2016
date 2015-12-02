@@ -6,6 +6,7 @@
 
 #extension GL_ARB_shader_texture_lod : enable
 
+#define INPUT1 adsk_results_pass1
 #define INPUT3 adsk_results_pass3
 #define INPUT2 adsk_results_pass2
 #define ratio adsk_result_frameratio
@@ -28,8 +29,9 @@ uniform float lod_cc_mult;
 uniform bool mipmap;
 uniform float mm_scale;
 
-uniform sampler2D INPUT3;
+uniform sampler2D INPUT1;
 uniform sampler2D INPUT2;
+uniform sampler2D INPUT3;
 uniform int sides;
 uniform float fstops;
 uniform int samples;
