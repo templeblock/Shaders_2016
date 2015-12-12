@@ -13,6 +13,8 @@
 #define fstops_max 4.0
 #define max_focal 10.0
 
+float adsk_getLuminance( in vec3 color );
+
 uniform float ratio;
 uniform float adsk_result_w, adsk_result_h;
 vec2 res = vec2(adsk_result_w, adsk_result_h);
@@ -25,6 +27,9 @@ uniform float focal_length;
 uniform float focal_distance;
 uniform vec2 depth_pick;
 uniform bool pick_depth;
+
+uniform int pick_type;
+uniform vec3 pick_col;
 uniform bool use_rgb;
 uniform vec3 rgb;
 uniform float falloff_u;
@@ -70,9 +75,12 @@ void main(void) {
 
 	float fp = focal_distance;
 
-	if (pick_depth) {
+	if (pick_type == 1) {
 		fp = texture2D(INPUT1, depth_pick).r;
+	} else if (pick_type == 2) {
+		fp = adsk_getLuminance(pick_col);
 	}
+
 
 	float blur_factor = distance(fp, depth) * aperture;
 	blur_factor = (1.0 - blur_factor) * focal_length;
