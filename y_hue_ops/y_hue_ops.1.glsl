@@ -1,6 +1,7 @@
 #version 120
 
 #define ratio adsk_result_frameratio
+#define PI 3.141592653589793238462643383279502884197969
 
 uniform float ratio;
 uniform float adsk_result_w, adsk_result_h;
@@ -32,6 +33,7 @@ uniform float m_f;
 uniform float y_f;
 uniform float o_f;
 uniform bool yuv;
+uniform int matte_out;
 
 vec2 rotate(vec2 uv, float aa)
 {
@@ -68,6 +70,20 @@ vec3 to_rgb(vec3 col)
 	return col * rgb;
 }
 
+float diff(vec3 a, vec3 b, float f)
+{
+	vec2 q = a.gb;
+	vec2 r = b.gb;
+
+	q = normalize(q);
+	r = normalize(r);
+
+	float angle = acos(dot(q, r)) / PI;
+	float falloff = pow(1.0 - angle, f);
+
+	return clamp(falloff, 0.0, 1.0);
+}
+
 void main(void) {
 	vec2 st = gl_FragCoord.xy / res;
 
@@ -78,53 +94,38 @@ void main(void) {
 	vec3 orig = front;
 
 	vec2 uv = front.gb;
+	float y = front.r;
 	float u = front.g;
 	float v = front.b;
 
-	vec2 red = vec2(-.09985, .61465);
-	vec2 green = vec2(-.33594, -.55859);
-	vec2 blue = vec2(.43579, -.05637);
-	vec2 cyan = vec2(.09985, -.61475);
-	vec2 magenta = vec2(.33594, .55859);
-	vec2 yellow = vec2(-.43579, .05637);
-	vec2 orange = vec2(-.31787, .64307);
+	vec3 red = (vec3(y, -.09985, .61465) );
+	vec3 green = (vec3(y, -.33594, -.55859) );
+	vec3 blue = (vec3(y, .43579, -.05637) );
+	vec3 cyan = (vec3(y, .09985, -.61475) );
+	vec3 magenta = (vec3(y, .33594, .55859) );
+	vec3 yellow = (vec3(y, -.43579, .05637) );
+	vec3 orange = (vec3(y, -.31787, .64307) );
 
-	float d_r = 1.0 - distance(uv, red) + (r_f - 1.0);
-	d_r = clamp(d_r, 0.0, 1.0);
+	float r_d = diff(red, front, r_f);
+	front.gb = mix(front.gb, rotate(front.gb, r_angle) * vec2(r_s), r_d);
 
-	float d_g = 1.0 - distance(uv, green) + (g_f - 1.0);
-	d_g = clamp(d_g, 0.0, 1.0);
+	float g_d = diff(green, front, g_f);
+	front.gb = mix(front.gb, rotate(front.gb, g_angle) * vec2(g_s), g_d);
 
-	float d_b = 1.0 - distance(uv, blue) + (b_f - 1.0);
-	d_b = clamp(d_b, 0.0, 1.0);
+	float b_d = diff(blue, front, b_f);
+	front.gb = mix(front.gb, rotate(front.gb, b_angle) * vec2(b_s), b_d);
 
-	float d_c = 1.0 - distance(uv, cyan) + (c_f - 1.0);
-	d_c = clamp(d_c, 0.0, 1.0);
+	float c_d = diff(cyan, front, c_f);
+	front.gb = mix(front.gb, rotate(front.gb, c_angle) * vec2(c_s), c_d);
 
-	float d_m = 1.0 - distance(uv, magenta) + (m_f - 1.0);
-	d_m = clamp(d_m, 0.0, 1.0);
+	float m_d = diff(magenta, front, m_f);
+	front.gb = mix(front.gb, rotate(front.gb, m_angle) * vec2(m_s), m_d);
 
-	float d_y = 1.0 - distance(uv, yellow) + (y_f - 1.0);
-	d_y = clamp(d_y, 0.0, 1.0);
+	float y_d = diff(yellow, front, y_f);
+	front.gb = mix(front.gb, rotate(front.gb, y_angle) * vec2(y_s), y_d);
 
-	float d_o = 1.0 - distance(uv, orange) + (o_f - 1.0);
-	d_o = clamp(d_o, 0.0, 1.0);
-
-	front.gb = rotate(front.gb, r_angle * d_r);
-	front.gb = rotate(front.gb, g_angle * d_g);
-	front.gb = rotate(front.gb, b_angle * d_b);
-	front.gb = rotate(front.gb, c_angle * d_c);
-	front.gb = rotate(front.gb, m_angle * d_m);
-	front.gb = rotate(front.gb, y_angle * d_y);
-	front.gb = rotate(front.gb, o_angle * d_o);
-
-	front.gb = mix(front.gb, front.gb * vec2(r_s), d_r);
-	front.gb = mix(front.gb, front.gb * vec2(g_s), d_g);
-	front.gb = mix(front.gb, front.gb * vec2(b_s), d_b);
-	front.gb = mix(front.gb, front.gb * vec2(c_s), d_c);
-	front.gb = mix(front.gb, front.gb * vec2(m_s), d_m);
-	front.gb = mix(front.gb, front.gb * vec2(y_s), d_y);
-	front.gb = mix(front.gb, front.gb * vec2(o_s), d_o);
+	float o_d = diff(orange, front, o_f);
+	front.gb = mix(front.gb, rotate(front.gb, o_angle) * vec2(o_s), o_d);
 
 	if (! yuv) {
 		front = to_rgb(front);
@@ -132,6 +133,23 @@ void main(void) {
 	}
 
 	front = mix(orig, front, matte);
+
+	if (matte_out == 1) {
+		matte = r_d;
+	} else if (matte_out == 2) {
+		matte = g_d;
+	} else if (matte_out == 3) {
+		matte = b_d;
+	} else if (matte_out == 4) {
+		matte = c_d;
+	} else if (matte_out == 5) {
+		matte = m_d;
+	} else if (matte_out == 6) {
+		matte = y_d;
+	} else if (matte_out == 7) {
+		matte = o_d;
+	}
+
 
 	gl_FragColor = vec4(front, matte);
 }
