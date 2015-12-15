@@ -1,0 +1,79 @@
+<ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="miles@noesclavo.com LINES Make a line or multiple lines for some pretty neato designs." Name="LINES">
+   <Shader OutputBitDepth="Output" Index="1">
+      <Uniform Inc="0.01" Tooltip="Location of 1st endpoint." Row="0" Col="0" Page="0" IconType="Light" Type="vec2" DisplayName="Point 1" Name="p1">
+         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.25">
+         </SubUniform>
+         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.25">
+         </SubUniform>
+      </Uniform>
+
+      <Uniform Inc="0.01" Tooltip="Location of 2nd endpoint." Row="2" Col="0" Page="0" IconType="Light" Type="vec2" DisplayName="Point 2" Name="p2">
+         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.75">
+         </SubUniform>
+         <SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.75">
+         </SubUniform>
+      </Uniform>
+
+	 <Uniform Max="1000000" Min="1" Default="1" Inc="1" Tooltip="Line thickness." Row="2" Col="3" Page="0" Type="int" DisplayName="Thickness" Name="thickness">
+      </Uniform>
+
+	 <Uniform ResDependent="None" Max="1000000" Min="1" Default="2" Inc="1" Tooltip="Line softness." Row="3" Col="3" Page="0" Type="int" DisplayName="Softness" Name="softness">
+      </Uniform>
+
+	<Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.65" Inc="0.01" Tooltip="Make the line bend and or break." Row="4" Col="3" Page="0" Type="float" DisplayName="Bend" Name="bend">
+      </Uniform>
+
+	<Uniform Max="1000000" Min="1" Default="25" Inc="1" Tooltip="Number of lines." Row="0" Col="3" Page="0" Type="int" DisplayName="Number" Name="num_lines">
+      </Uniform>
+
+	 <Uniform ResDependent="None" Max="1000000.0" Min="0." Default="3.0" Inc="0.01" Tooltip="Spacing between lines." Row="1" Col="3" Page="0" Type="float" DisplayName="Spacing" Name="spacing">
+      </Uniform>
+
+	<Uniform Row="4" Col="0" Page="0" Default="False" Tooltip="Stop the line at the end points." Type="bool" DisplayName="Clip Ends" Name="clip_ends">
+      </Uniform>
+
+	<Uniform Inc="0.1" Tooltip="Color of the foreground." Row="0" Col="1" Page="0" IconType="None" ValueType="ColourWheel" Type="vec3" DisplayName="FG Color" Name="fgcol" HueShift="False"         AngleName="Hue"
+         IntensityName1="Gain" IntensityName2="Sat">
+         <SubUniform ResDependent="None" Max="1000.0" Min="-1000.0" Default="118.0" Inc="1.">
+         </SubUniform>
+         <SubUniform ResDependent="None" Max="1000.0" Min="-1000.0" Default="62.0" Inc="1.">
+         </SubUniform>
+         <SubUniform ResDependent="None" Max="100.0" Min="0.0" Default="31.0" Inc="1.">
+         </SubUniform>
+      </Uniform>
+
+	<Uniform Inc="0.1" Tooltip="Color of the background." Row="0" Col="2" Page="0" IconType="None" ValueType="ColourWheel" Type="vec3" DisplayName="BG Color" Name="bgcol" HueShift="False"         AngleName="Hue"
+         IntensityName1="Gain" IntensityName2="Sat">
+         <SubUniform ResDependent="None" Max="1000.0" Min="-1000.0" Default="199.0" Inc="1.">
+         </SubUniform>
+         <SubUniform ResDependent="None" Max="1000.0" Min="-1000.0" Default="19.0" Inc="1.">
+         </SubUniform>
+         <SubUniform ResDependent="None" Max="100.0" Min="0.0" Default="28.0" Inc="1.">
+         </SubUniform>
+      </Uniform>
+
+
+
+	<Uniform Row="0" Col="0" Page="1" Default="False" Tooltip="Clamp foreground color." Type="bool" DisplayName="Clamp Foreground" Name="clamp_fg">
+      </Uniform>
+	<Uniform Row="1" Col="0" Page="1" Default="True" Tooltip="Clamp background color." Type="bool" DisplayName="Clamp Background" Name="clamp_bg">
+      </Uniform>
+	<Uniform Row="2" Col="0" Page="1" Default="False" Tooltip="Clamp final result." Type="bool" DisplayName="Clamp Output" Name="clamp_output">
+      </Uniform>
+
+   </Shader>
+   <Page Name="LINES" Page="0">
+      <Col Name="Point Locations" Col="0" Page="0">
+      </Col>
+      <Col Name="Foreground Color" Col="1" Page="0">
+      </Col>
+      <Col Name="Background Color" Col="2" Page="0">
+      </Col>
+      <Col Name="Line Options" Col="3" Page="0">
+      </Col>
+   </Page>
+   <Page Name="CLAMPING" Page="1">
+      <Col Name="Clamp" Col="0" Page="1">
+      </Col>
+   </Page>
+</ShaderNodePreset>
