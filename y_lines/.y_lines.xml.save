@@ -56,7 +56,7 @@ Make a line or multiple lines for some pretty neato designs." Name="LINES">
 		<Uniform Row="2" Col="0" Page="1" Default="False" Tooltip="Clamp final result." Type="bool" DisplayName="Clamp Output" Name="clamp_output">
       </Uniform>
 
-		<Uniform Default="0" Inc="1" Tooltip="Change the spawn type of the second point." Row="4" Col="0" Page="0" DisplayName="Clip Ends" Type="int" ValueType="Popup" Name="clip_end">
+		<Uniform Default="0" Inc="1" Tooltip="Change the spawn type of the second point." Row="4" Col="0" Page="1" DisplayName="Clip Ends" Type="int" ValueType="Popup" Name="clip_end">
 			<PopupEntry Title="Don't Clip" Value="0">
 			</PopupEntry>
 			<PopupEntry Title="Clip P1" Value="1">
@@ -64,8 +64,8 @@ Make a line or multiple lines for some pretty neato designs." Name="LINES">
 			<PopupEntry Title="Clip P2" Value="2">
 			</PopupEntry>
 			<PopupEntry Title="Clip Both" Value="3">
-			</PopupEntry>
 	      </Uniform>
+
 
 		<Uniform Default="0" Inc="1" Tooltip="Change the spawn type of the second point." Row="0" Col="2" Page="1" DisplayName="Spawn From" Type="int" ValueType="Popup" Name="emmit_from">
 			<PopupEntry Title="Point1" Value="0">
