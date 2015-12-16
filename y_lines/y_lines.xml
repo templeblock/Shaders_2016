@@ -139,7 +139,7 @@ Make a line or multiple lines for some pretty neato designs." Name="LINES">
          </PopupEntry>
          <PopupEntry Title="Sin X * PI" Value="8">
          </PopupEntry>
-         <PopupEntry Title="Sin X & Y * PI" Value="9">
+         <PopupEntry Title="Sin X n Y * PI" Value="9">
          </PopupEntry>
          <PopupEntry Title="1" Value="10">
          </PopupEntry>
