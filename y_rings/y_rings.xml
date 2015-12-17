@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="miles@noesclavo.com
+
+RINGS
+
+Use circles for a little look dev." Name="RINGS">
+	<Shader OutputBitDepth="Output" Index="1">
+		<Uniform Inc="0.01" Tooltip="" Row="0" Col="0" Page="0" IconType="Light" Type="vec2" DisplayName="Point 1" Name="p1">
+			<SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.5">
+         </SubUniform>
+			<SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.5">
+         </SubUniform>
+		</Uniform>
+		<Uniform Inc="0.01" Tooltip="" Row="2" Col="0" Page="0" IconType="Light" Type="vec2" DisplayName="Point 2" Name="p2">
+			<SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.75">
+         </SubUniform>
+			<SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.75">
+         </SubUniform>
+		</Uniform>
+		<Uniform Max="1000000" Min="-1000000" Default="16" Inc="1" Tooltip="" Row="4" Col="3" Page="0" Type="int" DisplayName="Branches" Name="branches">
+      </Uniform>
+		<Uniform Max="1000000" Min="-1000000" Default="20" Inc="1" Tooltip="" Row="0" Col="3" Page="0" Type="int" DisplayName="Number" Name="number">
+      </Uniform>
+		<Uniform Max="1000000" Min="-1000000" Default="175" Inc="1" Tooltip="" Row="1" Col="3" Page="0" Type="int" DisplayName="Radius" Name="radius">
+      </Uniform>
+		<Uniform Max="1000000" Min="-1000000" Default="10" Inc="1" Tooltip="" Row="2" Col="3" Page="0" Type="int" DisplayName="Line Width" Name="ring_width">
+      </Uniform>
+		<Uniform Max="1000000" Min="-1000000" Default="80" Inc="1" Tooltip="" Row="3" Col="3" Page="0" Type="int" DisplayName="Spacing" Name="spacing">
+      </Uniform>
+		<Uniform Inc="0.1" Tooltip="Color of the foreground." Row="0" Col="1" Page="0" IconType="None" ValueType="ColourWheel" Type="vec3" DisplayName="FG Color" Name="fgcol" HueShift="False" AngleName="Hue" IntensityName1="Gain" IntensityName2="Sat">
+			<SubUniform ResDependent="None" Max="1000.0" Min="-1000.0" Default="118.0" Inc="1.">
+         </SubUniform>
+			<SubUniform ResDependent="None" Max="1000.0" Min="-1000.0" Default="62.0" Inc="1.">
+         </SubUniform>
+			<SubUniform ResDependent="None" Max="100.0" Min="0.0" Default="31.0" Inc="1.">
+         </SubUniform>
+		</Uniform>
+		<Uniform Inc="0.1" Tooltip="Color of the background." Row="0" Col="2" Page="0" IconType="None" ValueType="ColourWheel" Type="vec3" DisplayName="BG Color" Name="bgcol" HueShift="False" AngleName="Hue" IntensityName1="Gain" IntensityName2="Sat">
+			<SubUniform ResDependent="None" Max="1000.0" Min="-1000.0" Default="199.0" Inc="1.">
+         </SubUniform>
+			<SubUniform ResDependent="None" Max="1000.0" Min="-1000.0" Default="19.0" Inc="1.">
+         </SubUniform>
+			<SubUniform ResDependent="None" Max="100.0" Min="0.0" Default="28.0" Inc="1.">
+         </SubUniform>
+		</Uniform>
+		<Uniform Row="0" Col="0" Page="1" Default="False" Tooltip="" Type="bool" DisplayName="Clamp Foreground" Name="clamp_fg">
+      </Uniform>
+		<Uniform Row="1" Col="0" Page="1" Default="False" Tooltip="" Type="bool" DisplayName="Clamp Result" Name="clamp_out">
+      </Uniform>
+		<Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.65" Inc="0.01" Tooltip="" Row="0" Col="1" Page="1" Type="float" DisplayName="FG Max" Name="fg_max">
+      </Uniform>
+		<Uniform ResDependent="None" Max="1000000.0" Min="000000.0" Default="1.0" Inc="0.01" Tooltip="" Row="1" Col="1" Page="1" Type="float" DisplayName="Softness" Name="softness">
+      </Uniform>
+		<Uniform Row="0" Col="2" Page="1" Default="False" Tooltip="" Type="bool" DisplayName="Show Center Ring" Name="show_center_ring">
+		       </Uniform>
+		<Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="6.0" Inc="0.01" Tooltip="" Row="1" Col="2" Page="1" Type="float" DisplayName="Aspect" Name="aspect">
+      </Uniform>
+		<Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="2" Col="2" Page="1" Type="float" DisplayName="Warp" Name="scale">
+      </Uniform>
+	</Shader>
+	<Page Name="CIRCLES" Page="0">
+		<Col Name="Point Positions" Col="0" Page="0">
+      </Col>
+		<Col Name="Foreground Color" Col="1" Page="0">
+      </Col>
+		<Col Name="Background Color" Col="2" Page="0">
+      </Col>
+		<Col Name="Circles" Col="3" Page="0">
+      </Col>
+	</Page>
+	<Page Name="FUN" Page="1">
+		<Col Name="Clamping" Col="0" Page="1">
+      </Col>
+		<Col Name="Ring Options 1" Col="1" Page="1">
+      </Col>
+		<Col Name="Ring Options 2" Col="2" Page="1">
+      </Col>
+	</Page>
+</ShaderNodePreset>
