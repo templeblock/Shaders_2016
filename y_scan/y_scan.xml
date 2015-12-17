@@ -5,8 +5,10 @@ SCAN
 
 Make Something" Name="SCAN">
 	<Shader OutputBitDepth="Output" Index="1">
-		<Uniform ResDependent="None" Max="10.0" Min="0.0" Default="1.0" Inc="0.01" Tooltip="" Row="2" Col="3" Page="0" Type="float" DisplayName="Noise Speed" Name="noise_speed" UIConditionSource="use_noise" UIConditionType="Hide" UIConditionValue="True">
+
+		<Uniform Index="0" NoInput="White" Tooltip="" DisplayName="Animater" InputColor="80, 80, 20" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
       </Uniform>
+
 	</Shader>
 	<Shader OutputBitDepth="Output" Index="2">
 		<Uniform ResDependent="None" Max="10.0" Min="-10.0" Default="-0.1" Inc="0.01" Tooltip="" Row="0" Col="0" Page="1" Type="float" DisplayName="Start Point" Name="x1">
@@ -21,10 +23,16 @@ Make Something" Name="SCAN">
       </Uniform>
 		<Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass1">
       </Uniform>
-		<Uniform ResDependent="None" Max="1000000.0" Min="000000.0" Default="20.0" Inc="0.01" Tooltip="" Row="1" Col="0" Page="0" Type="float" DisplayName="Width" Name="width">
+		<Uniform ResDependent="None" Max="1000000.0" Min="000000.0" Default="20.0" Inc="0.01" Tooltip="" Row="1" Col="0" Page="0" Type="float" DisplayName="Line Width" Name="width">
       </Uniform>
-		<Uniform ResDependent="None" Max="1000000.0" Min="000000.0" Default="0.75" Inc="0.01" Tooltip="" Row="2" Col="0" Page="0" Type="float" DisplayName="Height" Name="height">
+
+		<Uniform ResDependent="None" Max="1000000.0" Min="000000.0" Default="0.75" Inc="0.01" Tooltip="" Row="2" Col="0" Page="0" Type="float" DisplayName="Height" Name="height"
+		UIConditionSource="swap_uv" UIConditionType="Hide" UIConditionValue="False">
       </Uniform>
+		<Uniform ResDependent="None" Max="1000000.0" Min="000000.0" Default="0.75" Inc="0.01" Tooltip="" Row="2" Col="0" Page="0" Type="float" DisplayName="Width" Name="all_width"
+		UIConditionSource="swap_uv" UIConditionType="Hide" UIConditionValue="True">
+      </Uniform>
+
 		<Uniform Inc="0.01" Tooltip="" Row="3" Col="0" Page="0" IconType="None" Type="vec2" DisplayName="Position" Name="pos">
 			<SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0">
          </SubUniform>
@@ -35,8 +43,13 @@ Make Something" Name="SCAN">
       </Uniform>
 		<Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0" Inc="0.01" Tooltip="" Row="1" Col="3" Page="0" Type="float" DisplayName="Noise Scale" Name="noise_scale" UIConditionSource="use_noise" UIConditionType="Hide" UIConditionValue="True">
       </Uniform>
-		<Uniform Row="3" Col="3" Page="0" Default="False" Tooltip="" Type="bool" DisplayName="Show Noise in Alpha" Name="show_noise" UIConditionSource="use_noise" UIConditionType="Hide" UIConditionValue="True">
+
+		<Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="1.0" Inc="0.01" Tooltip="" Row="2" Col="3" Page="0" Type="float" DisplayName="Power" Name="power">
       </Uniform>
+
+		<Uniform Row="3" Col="3" Page="0" Default="False" Tooltip="" Type="bool" DisplayName="Show Animator in Alpha" Name="show_anim">
+      </Uniform>
+
 		<Uniform Inc="0.1" Tooltip="Color of the foreground." Row="0" Col="1" Page="0" IconType="None" ValueType="ColourWheel" Type="vec3" DisplayName="FG Color" Name="fgcol" HueShift="False" AngleName="Hue" IntensityName1="Gain" IntensityName2="Sat">
 			<SubUniform ResDependent="None" Max="1000.0" Min="-1000.0" Default="25.0" Inc="1.">
          </SubUniform>
@@ -53,6 +66,16 @@ Make Something" Name="SCAN">
 			<SubUniform ResDependent="None" Max="100.0" Min="0.0" Default="28.0" Inc="1.">
          </SubUniform>
 		</Uniform>
+
+
+		<Uniform Max="1000000" Min="000000" Default="1" Inc="1" Tooltip="" Row="1" Col="1" Page="1" Type="int" DisplayName="Replicate" Name="replicate">
+      </Uniform>
+
+		<Uniform Row="2" Col="1" Page="1" Default="True" Tooltip="" Type="bool" DisplayName="Show First Line" Name="show_first">
+      </Uniform>
+
+		<Uniform Row="4" Col="3" Page="0" Default="False" Tooltip="" Type="bool" DisplayName="Animate with Texture" Name="use_tex">
+      </Uniform>
 	</Shader>
 	<Page Name="STAT" Page="0">
 		<Col Name="Lines" Col="0" Page="0">

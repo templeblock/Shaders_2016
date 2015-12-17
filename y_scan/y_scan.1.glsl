@@ -12,10 +12,9 @@ vec2 res = vec2(adsk_result_w, adsk_result_h);
 vec2 texel = vec2(1.0) / res;
 
 uniform sampler2D INPUT1;
-uniform float noise_speed;
 
 float rand(vec2 co){
-	float time = floor((adsk_time + 100) / noise_speed);
+	float time = floor(adsk_time + 100);
     return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453 * time);
 }
 
@@ -23,5 +22,7 @@ void main(void) {
 	vec2 st = gl_FragCoord.xy / res;
 	float noise = rand(st);
 
-	gl_FragColor.a = noise;
+	vec3 input1 = texture2D(INPUT1, st).rgb;
+
+	gl_FragColor = vec4(input1, noise);
 }

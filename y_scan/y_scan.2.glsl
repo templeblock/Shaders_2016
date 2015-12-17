@@ -23,14 +23,19 @@ uniform float x2;
 uniform int samples;
 uniform float width;
 uniform float height;
+uniform float all_width;
 uniform vec2 pos;
 uniform float noise_scale;
 uniform vec3 fgcol;
 uniform vec3 bgcol;
 uniform bool use_noise;
-uniform bool show_noise;
+uniform bool show_anim;
 uniform bool swap_uv;
+uniform bool use_tex;
+uniform bool show_first;
 uniform float fg_clamp;
+uniform float power;
+uniform int replicate;
 
 vec3 getRGB( float hue, float sat)
 {
@@ -46,40 +51,68 @@ vec3 getRGB( float hue, float sat)
 void main(void) {
 	vec2 st = gl_FragCoord.xy / res;
 	vec2 tmp = st;
-	tmp.y /= 0.0;
-	tmp.x /= noise_scale;
 
 	float lut = 1.0;
 
 	if (use_noise) {
+		tmp.y /= 0.0;
+		tmp.x /= noise_scale;
 		lut = texture2D(INPUT1, tmp).a;
 	}
+
+	if (use_tex) {
+		lut = texture2D(INPUT1, st).r;
+	}
+
+	lut = mix(1.0, lut, power);
 
 	float col = 0.0;
 
 	vec2 coords = st;
+	vec2 tp = pos;
+	float h = height;
 
 	if (swap_uv) {
 		coords.x = coords.y;
 		coords.y = st.x;
+
+		tp.x = pos.y;
+		tp.y = pos.x;
+		h = all_width;
 	}
 
 	coords = coords * 2.0 - 1.0;
 
-	coords -= pos;
+	coords -= tp;
 
-	for (int i = 0 ; i < samples ; i++) {
-		float s = float(i) / float(samples - 1);
-		float p1 = mix(x1, x2,s*lut);
-		float p2 = mix(x1, -x2,s*lut);
-		float w = texel.x * width;
+	for (int j = 0 ; j < replicate ; j++) {
+		for (int i = 0 ; i < samples ; i++) {
+			float s = float(i) * lut / max(float(samples - 1), .00001);
+			float q = float(j) / max(float(replicate - 1), .00001);
 
-		col += step(coords.x, p1) - step(coords.x, p1 - w);
-		col += step(coords.x, p2) - step(coords.x, p2 - w);
+			float start = x1;
+			float end = x2;
+
+			float rx = mix(start, end, q);
+			float ry = mix(start, -end, q);
+
+			float p1 = mix(rx, x2, s);
+			float p2 = mix(ry, -x2, s);
+
+			float w = texel.x * width;
+
+			if (i == 0 && show_first) {
+				col += step(coords.x, p1) - step(coords.x, p1 - w);
+				col += step(coords.x, p2) - step(coords.x, p2 - w);
+			} else if (i > 0) {
+				col += step(coords.x, p1) - step(coords.x, p1 - w);
+				col += step(coords.x, p2) - step(coords.x, p2 - w);
+			}
+		}
 	}
 
-	col *= step(coords.y, height);
-	col *= step(-coords.y, height);
+	col *= step(coords.y, h);
+	col *= step(-coords.y, h);
 
 	col *= fg_clamp;
 
@@ -98,7 +131,7 @@ void main(void) {
 	col = clamp(col, 0.0, 1.0);
 	outcol.a = col;
 
-	if (show_noise) {
+	if (show_anim) {
 		outcol.a = lut;
 	}
 
