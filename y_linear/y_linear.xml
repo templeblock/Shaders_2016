@@ -17,6 +17,8 @@ Convert footage to linear and back with ease." Name="LINEAR">
          </PopupEntry>
          <PopupEntry Title="1.8 Gamma" Value="4">
          </PopupEntry>
+         <PopupEntry Title="LogC V3" Value="5">
+         </PopupEntry>
       </Uniform>
       <Uniform Row="0" Col="1" Page="0" Default="False" Tooltip="" Type="bool" DisplayName="Invert" Name="invert">
       </Uniform>

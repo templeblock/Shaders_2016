@@ -104,6 +104,76 @@ vec3 adjust_gamma(vec3 col, float gamma)
     return col;
 }
 
+vec3 from_logc(vec3 col)
+{
+    float cut = .010591;
+    float a = 5.555556;
+    float b = .052272;
+    float c = 0.247190;
+    float d = 0.385537;
+    float e = 5.367655;
+    float f = 0.092809;
+    float e_cut_f = 0.149658;
+
+    if (col.r > e_cut_f) {
+        col.r = (pow(10, (col.r -d) / c) - b) / a;
+    } else {
+        col.r = (col.r - f) / e;
+    }
+ 
+    if (col.g > e_cut_f) {
+        col.g = (pow(10, (col.g -d) / c) - b) / a;
+    } else {
+        col.g = (col.g - f) / e;
+    }
+ 
+    if (col.b > e_cut_f) {
+        col.b = (pow(10, (col.b -d) / c) - b) / a;
+    } else {
+        col.b = (col.b - f) / e;
+    }
+    
+    return col;
+}
+
+float log10(float c)
+{
+    return log(c) / 2.3026;
+}
+
+vec3 to_logc(vec3 col)
+{
+    float cut = .010591;
+    float a = 5.555556;
+    float b = .052272;
+    float c = 0.247190;
+    float d = 0.385537;
+    float e = 5.367655;
+    float f = 0.092809;
+    float e_cut_f = 0.149658;
+
+    if (col.r > cut) {
+        col.r = c * log10(a * col.r + b) + d;
+    } else {
+        col.r = e * col.r + f;
+    }
+
+    if (col.g > cut) {
+        col.g = c * log10(a * col.g + b) + d;
+    } else {
+        col.g = e * col.g + f;
+    }
+
+    if (col.b > cut) {
+        col.b = c * log10(a * col.b + b) + d;
+    } else {
+        col.b = e * col.b + f;
+    }
+
+    return col;
+}
+
+
 vec3 do_colorspace(vec3 front, int op)
 {
     if (op == 0)
@@ -118,6 +188,8 @@ vec3 do_colorspace(vec3 front, int op)
             front = adjust_gamma(front, 2.2);
         } else if (i_colorspace == 4) {
             front = adjust_gamma(front, 1.8);
+        } else if (i_colorspace == 5) {
+            front = from_logc(front);
         }
     }
     else if (op == 1)
@@ -132,6 +204,8 @@ vec3 do_colorspace(vec3 front, int op)
             front = adjust_gamma(front, 1.0 / 2.2);
         } else if (i_colorspace == 4) {
             front = adjust_gamma(front, 1.0 / 1.8);
+        } else if (i_colorspace == 5) {
+            front = to_logc(front);
         }
     }
 
