@@ -23,8 +23,8 @@ uniform sampler2D INPUT1;
 
 uniform vec2 p1;
 uniform vec2 p2;
-uniform int thickness;
-uniform int softness;
+uniform float thickness;
+uniform float softness;
 uniform float mid_width;
 uniform float bend;
 uniform int num_lines;

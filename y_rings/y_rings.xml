@@ -21,11 +21,11 @@ Use circles for a little look dev." Name="RINGS">
       </Uniform>
 		<Uniform Max="1000000" Min="-1000000" Default="20" Inc="1" Tooltip="" Row="0" Col="3" Page="0" Type="int" DisplayName="Number" Name="number">
       </Uniform>
-		<Uniform Max="1000000" Min="-1000000" Default="175" Inc="1" Tooltip="" Row="1" Col="3" Page="0" Type="int" DisplayName="Radius" Name="radius">
+		<Uniform Max="1000000." Min="-1000000." Default="175." Inc=".1" Tooltip="" Row="1" Col="3" Page="0" Type="float" DisplayName="Radius" Name="radius">
       </Uniform>
-		<Uniform Max="1000000" Min="-1000000" Default="10" Inc="1" Tooltip="" Row="2" Col="3" Page="0" Type="int" DisplayName="Line Width" Name="ring_width">
+		<Uniform Max="1000000." Min="-1000000." Default="10." Inc=".1" Tooltip="" Row="2" Col="3" Page="0" Type="float" DisplayName="Line Width" Name="ring_width">
       </Uniform>
-		<Uniform Max="1000000" Min="-1000000" Default="80" Inc="1" Tooltip="" Row="3" Col="3" Page="0" Type="int" DisplayName="Spacing" Name="spacing">
+		<Uniform Max="1000000." Min="-1000000." Default="80." Inc=".1" Tooltip="" Row="3" Col="3" Page="0" Type="float" DisplayName="Spacing" Name="spacing">
       </Uniform>
 		<Uniform Inc="0.1" Tooltip="Color of the foreground." Row="0" Col="1" Page="0" IconType="None" ValueType="ColourWheel" Type="vec3" DisplayName="FG Color" Name="fgcol" HueShift="False" AngleName="Hue" IntensityName1="Gain" IntensityName2="Sat">
 			<SubUniform ResDependent="None" Max="1000.0" Min="-1000.0" Default="118.0" Inc="1.">

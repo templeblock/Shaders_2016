@@ -17,9 +17,9 @@ Make a line or multiple lines for some pretty neato designs." Name="LINES">
 			<SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.75">
          </SubUniform>
 		</Uniform>
-		<Uniform Max="1000000" Min="1" Default="1" Inc="1" Tooltip="Line thickness." Row="2" Col="3" Page="0" Type="int" DisplayName="Thickness" Name="thickness">
+		<Uniform Max="1000000." Min="1." Default="1." Inc=".1" Tooltip="Line thickness." Row="2" Col="3" Page="0" Type="float" DisplayName="Thickness" Name="thickness">
       </Uniform>
-		<Uniform ResDependent="None" Max="1000000" Min="1" Default="2" Inc="1" Tooltip="Line softness." Row="3" Col="3" Page="0" Type="int" DisplayName="Softness" Name="softness">
+		<Uniform ResDependent="None" Max="1000000." Min="1." Default="2." Inc=".1" Tooltip="Line softness." Row="3" Col="3" Page="0" Type="float" DisplayName="Softness" Name="softness">
       </Uniform>
 		<Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.65" Inc="0.01" Tooltip="Make the line bend and or break." Row="4" Col="3" Page="0" Type="float" DisplayName="Bend" Name="bend">
       </Uniform>

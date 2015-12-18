@@ -17,10 +17,10 @@ vec2 texel = vec2(1.0) / res;
 
 uniform sampler2D INPUT1;
 
-uniform int radius;
+uniform float radius;
 uniform int number;
-uniform int ring_width;
-uniform int spacing;
+uniform float ring_width;
+uniform float spacing;
 uniform vec2 p1;
 uniform vec2 p2;
 uniform float mixx;
@@ -75,7 +75,7 @@ float draw(vec2 coords, vec2 c, float r)
 	float d = distance(c, coords);
 
 	float outer = r;
-	float inner = outer - ring_width * texel.x;
+	float inner = outer - float(ring_width) * texel.x;
 
 	float outer_circle = 1.0 - smoothstep(outer, outer + softness * .001, d);
 	float inner_circle = 1.0 - smoothstep(inner, inner + softness * .001, d);
@@ -102,10 +102,10 @@ void main(void) {
 	for (int j = 0 ; j < branches ; j++) {
 		for (int i = 0 ; i < number ; i++) {
 			vec2 coords = st;
-			vec2 center = mix(p1, p2, float(i) / float(number - 1));
-			float r = (radius + i * spacing) * texel.x;
+			vec2 center = mix(p1, p2, float(i) / float(number - 1.));
+			float r = (radius + float(i) * spacing) * texel.x;
 
-			if (number == 1) {
+			if (number == 1.) {
 				center = p1;
 			}
 
