@@ -27,6 +27,7 @@ uniform float focal_length;
 uniform float focal_distance;
 uniform vec2 depth_pick;
 uniform bool pick_depth;
+uniform bool invert;
 
 uniform int pick_type;
 uniform vec3 pick_col;
@@ -90,6 +91,10 @@ void main(void) {
 	if (use_rgb) {
 		matte = min(matte, max_d);
 	}
+
+  if (invert) {
+    matte = 1.0 - matte;
+  }
 
 	gl_FragColor = vec4(front,  matte);
 }

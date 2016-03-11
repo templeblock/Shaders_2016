@@ -5,7 +5,7 @@ LUMA MATTE
 
 Pull a luma key based on a specific luminance value." Name="LUMA_MATTE">
 	<Shader OutputBitDepth="Output" Index="1">
-		<Uniform ResDependent="None" Max="2000000.0" Min="-1.0" Default="1.0" Inc="0.01" Tooltip="" Row="0" Col="1" Page="0" Type="float" DisplayName="Blacks" Name="aperture">
+		<Uniform ResDependent="None" Max="2000000.0" Min="-1.0" Default="1.0" Inc="0.01" Tooltip="Crush or open up shadows." Row="0" Col="1" Page="0" Type="float" DisplayName="Blacks" Name="aperture">
       </Uniform>
 		<Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="Front" InputType="Front" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
       </Uniform>
@@ -49,6 +49,8 @@ Pull a luma key based on a specific luminance value." Name="LUMA_MATTE">
 			<SubUniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0">
          </SubUniform>
 		</Uniform>
+		<Uniform Row="0" Col="3" Page="0" Default="False" Tooltip="" Type="bool" DisplayName="Invert Matte" Name="invert">
+      </Uniform>
 		<Uniform ResDependent="None" Max="20.0" Min="-1.0" Default="1.0" Inc="0.5" Tooltip="" Row="2" Col="2" Page="0" Type="float" DisplayName="U Falloff" Name="falloff_u" UIConditionSource="use_rgb" UIConditionValue="True" UIConditionType="Hide">
       </Uniform>
 		<Uniform ResDependent="None" Max="20.0" Min="-1.0" Default="1.0" Inc="0.5" Tooltip="" Row="3" Col="2" Page="0" Type="float" DisplayName="V Falloff" Name="falloff_v" UIConditionSource="use_rgb" UIConditionValue="True" UIConditionType="Hide">
@@ -60,6 +62,8 @@ Pull a luma key based on a specific luminance value." Name="LUMA_MATTE">
 		<Col Name="Tolerence Options" Col="1" Page="0">
       </Col>
 		<Col Name="YUV Options" Col="2" Page="0">
+      </Col>
+		<Col Name="I/O" Col="3" Page="0">
       </Col>
 	</Page>
 </ShaderNodePreset>

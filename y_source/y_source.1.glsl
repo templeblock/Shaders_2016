@@ -78,7 +78,7 @@ void main(void) {
 	matte_coords = rot_coords(matte_coords, matte_rotate, matte_center);
 	matte_coords = trans_coords(matte_coords, matte_pos);
 
-	vec3 matte = texture2D(Matte, matte_coords).rgb;
+	float matte = texture2D(Matte, matte_coords).r;
 
 	vec3 back = texture2D(Back, st).rgb;
 
@@ -86,7 +86,8 @@ void main(void) {
 		back = texture2D(Front, st).rgb;
 	}
 
+
 	vec3 comp = mix(back, front, matte * ((100 - transparency) / 100.0));
 
-	gl_FragColor = vec4(comp, luma(matte));
+	gl_FragColor = vec4(comp,matte);
 }

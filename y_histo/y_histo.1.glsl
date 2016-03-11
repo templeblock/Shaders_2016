@@ -9,7 +9,7 @@ vec2 res = vec2(adsk_result_w, adsk_result_h);
 vec2 texel = vec2(1.0) / res;
 
 float adsk_getLuminance( in vec3 color );
-float adsk_highlights( in float pixel, in float halfPoint ); 
+float adsk_highlights( in float pixel, in float halfPoint );
 float adsk_shadows( in float pixel, in float halfPoint );
 
 uniform sampler2D Front;
