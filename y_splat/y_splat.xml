@@ -1,10 +1,10 @@
 <ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="
 
-SPLAT
+SPLAT !
 
 Dissolve between 3 different textures using a 4th texture as the 'matte'. Great for simulating a change in a ground cover texture or other organic textures. The 'matte' texture should be comprised of many different hues because rotating the hue causes the transformation between textures. For optimal results the 'matte' texture should be in the same 'family' as the textures your trying to animate through. Try people's faces for a scare !
 
-Demo clip: https://www.youtube.com/watch?v=uMhyjDT43tU&feature=youtu.be
+Demo: https://www.youtube.com/watch?v=uMhyjDT43tU&amp;feature=youtu.be
 
 miles@noesclavo.com" Name="SPLAT">
    <Shader OutputBitDepth="Output" Index="1">
