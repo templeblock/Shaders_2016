@@ -1,0 +1,106 @@
+<ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="
+
+SPLAT
+
+Dissolve between 3 different textures using a 4th texture as the 'matte'. Great for simulating a change in a ground cover texture or other organic textures. The 'matte' texture should be comprised of many different hues because rotating the hue causes the transformation between textures. For optimal results the 'matte' texture should be in the same 'family' as the textures your trying to animate through. Try people's faces for a scare.
+
+miles@noesclavo.com" Name="SPLAT">
+   <Shader OutputBitDepth="Output" Index="1">
+      <Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="RedChannel" InputType="Front" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="RedChannel">
+      </Uniform>
+   </Shader>
+   <Shader OutputBitDepth="Output" Index="2">
+      <Uniform Index="1" NoInput="Error" Tooltip="" DisplayName="GreenChannel" InputType="Back" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="GreenChannel">
+      </Uniform>
+   </Shader>
+   <Shader OutputBitDepth="Output" Index="3">
+      <Uniform Index="2" NoInput="Error" Tooltip="" DisplayName="BlueChannel" InputType="Matte" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="BlueChannel">
+      </Uniform>
+   </Shader>
+   <Shader OutputBitDepth="Output" Index="4">
+      <Uniform Index="3" NoInput="Error" Tooltip="" DisplayName="MixTexture" InputColor="67, 77, 0" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="MixTexture">
+      </Uniform>
+   </Shader>
+   <Shader OutputBitDepth="Output" Index="5">
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass3">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Move the texture along the x axis." Row="1" Col="0" Page="0" Type="float" DisplayName="Move X" Name="red_y">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Move the texture along the y axis." Row="0" Col="0" Page="0" Type="float" DisplayName="Move Y" Name="red_x">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Move the texture along the x axis." Row="0" Col="1" Page="0" Type="float" DisplayName="Move X" Name="green_x">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Move the texture along the y axis." Row="1" Col="1" Page="0" Type="float" DisplayName="Move Y" Name="green_y">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Move the texture along the x axis." Row="0" Col="2" Page="0" Type="float" DisplayName="Move X" Name="blue_x">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Move the texture along the y axis." Row="1" Col="2" Page="0" Type="float" DisplayName="Move Y" Name="blue_y">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Move the texture along the x axis." Row="0" Col="3" Page="0" Type="float" DisplayName="Move X" Name="matte_x">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Move the texture along the y axis." Row="1" Col="3" Page="0" Type="float" DisplayName="Move Y" Name="matte_y">
+      </Uniform>
+
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Uniformly scale the texture." Row="2" Col="0" Page="0" Type="float" DisplayName="Scale" Name="red_scale">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Uniformly scale the texture." Row="2" Col="1" Page="0" Type="float" DisplayName="Scale" Name="green_scale">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Uniformly scale the texture." Row="2" Col="2" Page="0" Type="float" DisplayName="Scale" Name="blue_scale">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="Uniformly scale the texture." Row="2" Col="3" Page="0" Type="float" DisplayName="Scale" Name="matte_scale">
+      </Uniform>
+
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="1.0" Tooltip="Rotate the texture." Row="3" Col="0" Page="0" Type="float" DisplayName="Rotate" Name="red_rotate">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="1.0" Tooltip="Rotate the texture." Row="3" Col="1" Page="0" Type="float" DisplayName="Rotate" Name="green_rotate">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="1.0" Tooltip="Rotate the texture." Row="3" Col="2" Page="0" Type="float" DisplayName="Rotate" Name="blue_rotate">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="1.0" Tooltip="Rotate the texture." Row="3" Col="3" Page="0" Type="float" DisplayName="Rotate" Name="matte_rotate">
+      </Uniform>
+
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="1." Tooltip="Adjust contrast of the matte texture." Row="4" Col="0" Page="0" Type="float" DisplayName="Tex Contrast" Name="matte_contrast">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="1." Tooltip="Rotate the hue of the matte texture." Row="4" Col="1" Page="0" Type="float" DisplayName="Tex Hue" Name="matte_hue">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="1." Tooltip="Adjust the saturation of the matte texture." Row="4" Col="2" Page="0" Type="float" DisplayName="Tex Saturation" Name="matte_saturation">
+      </Uniform>
+
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass1">
+      </Uniform>
+
+
+      <Uniform Max="1000000" Min="-1000000" Default="0" Inc="1" Tooltip="Change this to the channel you would like output as the matte." Row="1" Col="0" Page="1" DisplayName="Matte Output" Type="int" Name="matte_out" ValueType="Popup">
+         <PopupEntry Title="Red" Value="0">
+         </PopupEntry>
+         <PopupEntry Title="Green" Value="1">
+         </PopupEntry>
+         <PopupEntry Title="Blue" Value="2">
+         </PopupEntry>
+      </Uniform>
+
+      <Uniform Row="4" Col="3" Page="0" Default="False" Tooltip="Click this to view your altered matte texture as the output." Type="bool" DisplayName="Output Texture" Name="output_matte">
+      </Uniform>
+      <Uniform Row="0" Col="0" Page="1" Default="False" Tooltip="Use the chroma only of the matte texture and on include the luminance." Type="bool" DisplayName="Use Texture Chroma Only" Name="chroma_only">
+      </Uniform>
+
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass4">
+      </Uniform>
+      <Uniform InputColor="67, 77, 83" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_MIRRORED_REPEAT" GL_TEXTURE_WRAP_S="GL_MIRRORED_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="adsk_results_pass2">
+      </Uniform>
+   </Shader>
+   <Page Name="SPLAT" Page="0">
+      <Col Name="Red" Col="0" Page="0">
+      </Col>
+      <Col Name="Green" Col="1" Page="0">
+      </Col>
+      <Col Name="Blue" Col="2" Page="0">
+      </Col>
+      <Col Name="Mix Texture" Col="3" Page="0">
+      </Col>
+   </Page>
+   <Page Name="OPTIONS" Page="1">
+      <Col Name="Matte Options" Col="0" Page="1">
+      </Col>
+   </Page>
+</ShaderNodePreset>
