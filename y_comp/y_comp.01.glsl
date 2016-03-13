@@ -17,7 +17,11 @@ uniform sampler2D INPUT2;
 uniform sampler2D INPUT3;
 
 uniform int i_colorspace;
+uniform int i_colorspace2;
 uniform float mix;
+uniform bool premult;
+uniform bool invert;
+uniform bool backdif;
 
 vec3 from_sRGB(vec3 col)
 {
@@ -178,37 +182,37 @@ vec3 to_logc(vec3 col)
     return col;
 }
 
-vec3 do_colorspace(vec3 front, int op)
+vec3 do_colorspace(vec3 front, int csp, int op)
 {
     if (op == 0)
     {
-        if (i_colorspace == 0) {
+        if (csp == 0) {
             front = from_rec709(front);
-        } else if (i_colorspace == 1) {
+        } else if (csp == 1) {
             front = from_sRGB(front);
-        } else if (i_colorspace == 2) {
+        } else if (csp == 2) {
             //linear
-        } else if (i_colorspace == 3) {
+        } else if (csp == 3) {
             front = adjust_gamma(front, 2.2);
-        } else if (i_colorspace == 4) {
+        } else if (csp == 4) {
             front = adjust_gamma(front, 1.8);
-        } else if (i_colorspace == 5) {
+        } else if (csp == 5) {
             front = from_logc(front);
         }
     }
     else if (op == 1)
     {
-        if (i_colorspace == 0) {
+        if (csp == 0) {
             front = to_rec709(front);
-        } else if (i_colorspace == 1) {
+        } else if (csp == 1) {
             front = to_sRGB(front);
-        } else if (i_colorspace == 2) {
+        } else if (csp == 2) {
             //linear
-        } else if (i_colorspace == 3) {
+        } else if (csp == 3) {
             front = adjust_gamma(front, 1.0 / 2.2);
-        } else if (i_colorspace == 4) {
+        } else if (csp == 4) {
             front = adjust_gamma(front, 1.0 / 1.8);
-        } else if (i_colorspace == 5) {
+        } else if (csp == 5) {
             front = to_logc(front);
         }
     }
@@ -223,10 +227,31 @@ void main(void)
     vec3 front = texture2D(INPUT1, st).rgb;
     vec3 back = texture2D(INPUT2, st).rgb;
     float matte = texture2D(INPUT3, st).r;
-    front = do_colorspace(front, 0);
+
+    if (premult) {
+      front /= max(matte, .00001);
+    }
+
+    front = do_colorspace(front, i_colorspace, 0);
+    if (backdif) {
+      back = do_colorspace(back, i_colorspace2, 0);
+    } else {
+      back = do_colorspace(back, i_colorspace, 0);
+    }
+
     vec3 comp = back;
 
-    comp = mix(comp, front, matte * mix);
+    matte = clamp(matte, 0.0, 1.0);
+
+    if (invert) {
+      matte = 1.0 - matte;
+    }
+
+    float alpha = (100.0 - mix) / 100.0 * matte;
+
+    comp = mix(comp, front, alpha);
+
+    comp =do_colorspace(comp, i_colorspace, 1);
 
     gl_FragColor = vec4(comp, matte);
 }

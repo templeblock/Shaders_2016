@@ -1,0 +1,72 @@
+<ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" TimelineUseBack="False" MatteProvider="False" CommercialUsePermitted="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" LimitInputsToTexture="True" Version="1" Description="
+
+  COMP
+
+  A simple A over B composite that takes in to acount colorspace of the inputs and assures that the comp is done linear.
+  Saves you from having to apply a LUT to get proper edges.
+
+  Demo: https://youtu.be/pl24lQZF8rc
+
+  miles&amp;noesclavo.com" Name="COMP">
+   <Shader OutputBitDepth="Output" Index="1">
+      <Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="Front" InputType="Front" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
+      </Uniform>
+
+      <Uniform Index="2" NoInput="Error" Tooltip="" DisplayName="Matte" InputType="Matte" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Matte">
+      </Uniform>
+
+      <Uniform Index="1" NoInput="Error" Tooltip="" DisplayName="Back" InputType="Back" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Back">
+      </Uniform>
+
+      <Uniform Max="1000000" Min="-1000000" Default="0" Inc="1" Tooltip="Working colorspace. Set this to your working colorspace. This insures a linear blend (no dark edges)." Row="0" Col="0" Page="0" DisplayName="Colorspace" Type="int" Name="i_colorspace" ValueType="Popup">
+           <PopupEntry Title="Rec 709" Value="0">
+           </PopupEntry>
+           <PopupEntry Title="sRGB" Value="1">
+           </PopupEntry>
+           <PopupEntry Title="Linear" Value="2">
+           </PopupEntry>
+           <PopupEntry Title="2.2 Gamma" Value="3">
+           </PopupEntry>
+           <PopupEntry Title="1.8 Gamma" Value="4">
+           </PopupEntry>
+           <PopupEntry Title="LogC" Value="5">
+           </PopupEntry>
+        </Uniform>
+
+      <Uniform Row="1" Col="0" Page="0" Default="False" Tooltip="" Type="bool" DisplayName="Back Colorspace is Different" Name="backdif">
+      </Uniform>
+
+      <Uniform Max="1000000" Min="-1000000" Default="0" Inc="1" Tooltip="Working colorspace. Set this to the colorspace of the Back input. This insures a linear blend (no dark edges)." Row="2" Col="0" Page="0" DisplayName="Back Colorspace" Type="int" Name="i_colorspace2" ValueType="Popup" UIConditionSource="backdif" UIConditionValue="True" UIConditionType="Hide">
+           <PopupEntry Title="Rec 709" Value="0">
+           </PopupEntry>
+           <PopupEntry Title="sRGB" Value="1">
+           </PopupEntry>
+           <PopupEntry Title="Linear" Value="2">
+           </PopupEntry>
+           <PopupEntry Title="2.2 Gamma" Value="3">
+           </PopupEntry>
+           <PopupEntry Title="1.8 Gamma" Value="4">
+           </PopupEntry>
+           <PopupEntry Title="LogC" Value="5">
+           </PopupEntry>
+        </Uniform>
+
+      <Uniform ResDependent="None" Max="100.0" Min="000000.0" Default="0.0" Inc="1.0" Tooltip="" Row="0" Col="1" Page="0" Type="float" DisplayName="Transparency" Name="mix">
+      </Uniform>
+
+      <Uniform Row="0" Col="2" Page="0" Default="False" Tooltip="" Type="bool" DisplayName="Invert Matte" Name="invert">
+      </Uniform>
+
+      <Uniform Row="1" Col="2" Page="0" Default="False" Tooltip="" Type="bool" DisplayName="Front is Premultiplied" Name="premult">
+      </Uniform>
+
+   </Shader>
+   <Page Name="COMP" Page="0">
+      <Col Name="Colorspace" Col="0" Page="0">
+      </Col>
+      <Col Name="Comp" Col="1" Page="0">
+      </Col>
+      <Col Name="Input Options" Col="2" Page="0">
+      </Col>
+   </Page>
+</ShaderNodePreset>
