@@ -7,7 +7,7 @@
 
   Demo: https://youtu.be/pl24lQZF8rc
 
-  miles&amp;noesclavo.com" Name="COMP">
+  miles@noesclavo.com" Name="COMP">
    <Shader OutputBitDepth="Output" Index="1">
       <Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="Front" InputType="Front" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_CLAMP_TO_EDGE" GL_TEXTURE_WRAP_S="GL_CLAMP_TO_EDGE" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="Front">
       </Uniform>
